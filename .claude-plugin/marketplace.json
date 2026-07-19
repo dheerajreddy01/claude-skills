@@ -274,6 +274,20 @@
       "source": "./enterprise-devtools/pagerduty",
       "version": "1.0.0",
       "strict": true
+    },
+    {
+      "name": "docker",
+      "description": "Docker image builds, container security, and Compose orchestration practices",
+      "source": "./enterprise-devtools/docker",
+      "version": "1.0.0",
+      "strict": true
+    },
+    {
+      "name": "kubernetes",
+      "description": "Kubernetes workload design, resource management, RBAC, and cluster reliability practices",
+      "source": "./enterprise-devtools/kubernetes",
+      "version": "1.0.0",
+      "strict": true
     }
   ]
 }

@@ -2,7 +2,7 @@
 schema: "1.0"
 name: claude-skills
 version: "2.0.0"
-description: A collection of domain expertise covering business, finance, creative, professional services, lifestyle, methodology, programming languages, cloud platforms, and developer tooling - 32 domains in total
+description: A collection of domain expertise covering business, finance, creative, professional services, lifestyle, methodology, programming languages, cloud platforms, and developer tooling - 34 domains in total
 triggers: [domain, professional, knowledge, business, finance, creative, lifestyle, language, cloud, devtools]
 keywords: [domain, skills, knowledge, business, finance, creative, professional, lifestyle, languages, cloud, devtools]
 author: dheerajreddy01
@@ -19,7 +19,7 @@ This is a library of domain expertise — spanning both non-technical fields and
 - Load specific domain knowledge on demand via skillpkg
 - Provide frameworks, methodologies, and best practices for each domain
 
-## Available Domains (32)
+## Available Domains (34)
 
 ### 💰 Finance
 | Domain | Triggers | Description |
@@ -88,6 +88,8 @@ This is a library of domain expertise — spanning both non-technical fields and
 | `enterprise-devtools/datadog` | datadog, monitor, unified service tagging | Datadog tagging strategy and cost management |
 | `enterprise-devtools/grafana-prometheus` | grafana, prometheus, promql, alertmanager | Prometheus/Grafana metrics and dashboard practices |
 | `enterprise-devtools/pagerduty` | pagerduty, on-call, escalation policy | PagerDuty on-call and incident response practices |
+| `enterprise-devtools/docker` | docker, dockerfile, container, compose | Docker image builds and container security practices |
+| `enterprise-devtools/kubernetes` | kubernetes, k8s, pod, deployment, helm | Kubernetes workload design and cluster reliability practices |
 
 ## Usage
 
