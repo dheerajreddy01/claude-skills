@@ -1,0 +1,259 @@
+---
+name: tech-spec-gen
+version: 2.0.0
+description: Design document → technical specification generator — converts any design document into an AI-executable technical implementation spec
+triggers: [tech-spec, technical specification, spec-gen, implementation-spec, design-to-spec]
+keywords: [technical-specification, design-document, implementation, tasks, worktree, prd, gdd, frd]
+author: claude-domain-skills
+---
+
+# Tech Spec Generator v2.0.0
+
+> Convert design documents such as GDD/PRD/FRD into AI-executable technical specifications
+
+## Quick Start
+
+```bash
+/tech-spec-gen [design document path]           # full conversion
+/tech-spec-gen [path] --type gdd        # specify document type
+/tech-spec-gen module [module name]        # single-module conversion
+/tech-spec-gen tasks                    # show tasks to be implemented
+/tech-spec-gen worktree [task-id]       # create a worktree for a task
+```
+
+---
+
+## 1. Core Philosophy
+
+### Design Documents vs. Specs AI Needs
+
+| Design document characteristics | Spec AI needs |
+|-------------|--------------|
+| Narrative description | Explicit input/output definitions |
+| Conceptual explanation | Verifiable completion criteria (Given-When-Then) |
+| Overall vision | Independently executable task breakdown |
+| Room for flexible interpretation | Clear technical decision guidance |
+
+### Supported Document Types
+
+| Type | Code | Applicable scenario |
+|------|------|----------|
+| Game Design Document | `gdd` | Game development |
+| Product Requirements Document | `prd` | Product development |
+| Feature Requirements Document | `frd` | Feature implementation |
+| System Design Document | `sdd` | System development |
+| Generic design document | `generic` | Auto-parsed |
+
+### Conversion Mapping Rules
+
+| Design document content | Technical spec equivalent |
+|-------------|-------------|
+| Vision/goals | Acceptance Criteria |
+| Feature description | System architecture + API design |
+| Business rules/game mechanics | Data model + business logic |
+| Values/configuration | Constant definitions + config structure |
+| UI/UX flow | State machine + screen specs |
+| Entities/characters/users | Entity Schema + behavior definitions |
+| Constraints | Architecture Decision Record (ADR) |
+
+---
+
+## 2. Five-Step Conversion Process
+
+```
+Step 1: Document parsing → read the document, detect type, extract structure
+    ↓ [Checkpoint: document type]
+Step 2: Technical analysis → analyze tech stack, identify modules, flag decision points
+    ↓ [Checkpoint: tech stack selection]
+Step 3: Architecture design → design architecture, define module boundaries, design data model
+    ↓ [Checkpoint: architecture design]
+Step 4: Task breakdown → break down by module, build dependency graph, estimate complexity
+    ↓ [Checkpoint: task breakdown preview]
+Step 5: Spec output → generate tech-spec.md + tasks/*.md + ADR
+```
+
+---
+
+## 3. Task Breakdown Strategy
+
+### Golden Rules of Decomposition
+
+- **Single responsibility**: Each task does one thing
+- **Independently testable**: Can be tested without other tasks being complete
+- **Clear boundaries**: Inputs/outputs are clearly defined
+- **Appropriate granularity**: Completable within one session
+- **Clear dependencies**: Dependency relationships are explicit with no cycles
+
+### Task Types
+
+| Type | Code | Description |
+|------|------|------|
+| Infrastructure | INFRA | Project setup, environment configuration |
+| Data model | MODEL | Entity definitions, Schema |
+| Core logic | CORE | Business logic, algorithms |
+| API layer | API | Interface definitions, endpoints |
+| UI components | UI | Screens, interactions |
+| Integration | INTG | Module integration, workflows |
+| Testing | TEST | Unit/integration tests |
+
+### Complexity Estimation
+
+| Complexity | Characteristics |
+|--------|------|
+| **S** | Single file, simple logic |
+| **M** | Multiple files, requires design |
+| **L** | Multi-module interaction, requires testing |
+| **XL** | Core architecture, complex logic |
+
+### Phase Breakdown
+
+```
+Phase 1: Foundation → project initialization, core data model, base configuration
+Phase 2: Core       → core business logic, main APIs, data access layer
+Phase 3: Features   → feature module implementation
+Phase 4: Integration → module integration, workflow wiring, integration tests
+Phase 5: Polish     → UI refinement, performance tuning, documentation polish
+```
+
+---
+
+## 4. Worktree Integration
+
+### Why Use Worktrees?
+
+- Each task has an independent branch, avoiding conflicts
+- Multiple tasks can be developed in parallel
+- Merge on completion, delete on failure
+- Keeps the main branch stable
+
+### Workflow
+
+```bash
+# 1. View available tasks
+/tech-spec-gen tasks
+
+# 2. Create a worktree for a task
+/tech-spec-gen worktree T002
+# → git worktree add ../[project]-T002 -b feature/T002-xxx
+
+# 3. Complete the implementation in the worktree
+
+# 4. Merge and clean up
+git checkout main && git merge feature/T002-xxx
+git worktree remove ../[project]-T002
+```
+
+### Files Generated by Worktree
+
+```
+../[project]-[task-id]/
+├── TASK-SPEC.md          # Detailed task spec
+├── ACCEPTANCE.md         # Acceptance criteria checklist
+└── .claude/context.md    # AI Agent context
+```
+
+---
+
+## 5. Output Structure
+
+```
+docs/tech-spec/
+├── tech-spec.md         # Main spec document
+├── tasks/               # Task specs
+│   ├── README.md        # Task index and dependency graph
+│   ├── T001-xxx.md
+│   └── ...
+└── adr/                 # Architecture Decision Records
+    └── ADR-001-xxx.md
+```
+
+---
+
+## 6. Quality Checks
+
+### Spec Completeness Check
+
+**Architecture**
+- [ ] Tech stack is clear and justified
+- [ ] Module responsibilities are clear with no overlap
+- [ ] Dependency relationships are clear with no cycles
+
+**Data Model**
+- [ ] All entities have complete definitions
+- [ ] Field types and constraints are clear
+- [ ] Relationships and indexes are defined
+
+**API Design**
+- [ ] All public APIs have signatures
+- [ ] Parameters and return values are documented
+- [ ] Error handling is defined
+
+**Task Breakdown**
+- [ ] Every task has acceptance criteria
+- [ ] Dependency relationships have no cycles
+- [ ] Complexity estimates are reasonable
+
+**Design Document Mapping**
+- [ ] All features have corresponding tasks
+- [ ] All values have constant definitions
+- [ ] Constraints are recorded in an ADR
+
+### Common Issues
+
+| Issue | Solution |
+|------|----------|
+| Task granularity too large | Break into subtasks (< 15 acceptance criteria) |
+| Implicit assumptions | Explicitly list all assumptions |
+| Circular dependencies | Redesign module boundaries |
+| Vague acceptance criteria | Rewrite in Given-When-Then format |
+| Unclear tech stack | Add a technical decision process |
+
+---
+
+## 7. Document-Type-Specific Mapping
+
+### GDD (Game Design Document)
+
+| GDD section | Technical spec equivalent |
+|----------|-------------|
+| Design pillars | ADR (architecture constraints) |
+| Core gameplay | System architecture + state machine |
+| Game mechanics | API design + business logic |
+| Numerical design | Constant definitions |
+| Character design | Entity Schema |
+
+### PRD (Product Requirements Document)
+
+| PRD section | Technical spec equivalent |
+|----------|-------------|
+| Problem definition | Acceptance criteria |
+| User stories | Feature modules + API |
+| Feature list | Task breakdown |
+| Success metrics | Performance acceptance criteria |
+
+### FRD (Feature Requirements Document)
+
+| FRD section | Technical spec equivalent |
+|----------|-------------|
+| Feature description | API design |
+| Business rules | Business logic + validation rules |
+| Data requirements | Data model |
+| Exception handling | Error handling strategy |
+
+---
+
+## Extended Resources
+
+- **Full templates**: `extended/templates.md`
+- **Usage examples**: `extended/examples.md`
+- **Game design**: use with `/game-planner` to generate a GDD
+- **Generic Galgame**: use with `/galgame-master` to create content
+
+---
+
+## Version History
+
+| Version | Date | Changes |
+|------|------|------|
+| 2.0.0 | 2026-01-15 | Generalized: supports GDD/PRD/FRD/SDD/Generic |
+| 1.0.0 | 2026-01-15 | Initial version: GDD-only converter |

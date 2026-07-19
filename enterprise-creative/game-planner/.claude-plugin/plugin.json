@@ -1,0 +1,18 @@
+{
+  "name": "game-planner",
+  "description": "Game Planner GDD Documentation",
+  "version": "1.0.0",
+  "author": {
+    "name": "dheerajreddy01",
+    "email": "reddydheeraj94@gmail.com"
+  },
+  "homepage": "https://github.com/dheerajreddy01/claude-skills",
+  "repository": "https://github.com/dheerajreddy01/claude-skills",
+  "license": "MIT",
+  "keywords": [
+    "game-planner",
+    "GDD",
+    "game planning",
+    "design pillars"
+  ]
+}

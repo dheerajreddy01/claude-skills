@@ -1,0 +1,181 @@
+{
+  "name": "claude-skills",
+  "owner": {
+    "name": "dheerajreddy01",
+    "email": "reddydheeraj94@gmail.com"
+  },
+  "metadata": {
+    "description": "Non-technical domain expertise skills that turn Claude into a specialist across many fields",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "marketing",
+      "description": "Marketing strategy and digital marketing",
+      "source": "./enterprise-business/marketing",
+      "version": "1.0.0",
+      "strict": true
+    },
+    {
+      "name": "product-management",
+      "description": "Product management and PRDs",
+      "source": "./enterprise-business/product-management",
+      "version": "1.0.0",
+      "strict": true
+    },
+    {
+      "name": "project-management",
+      "description": "Project management and Scrum",
+      "source": "./enterprise-business/project-management",
+      "version": "1.0.0",
+      "strict": true
+    },
+    {
+      "name": "sales",
+      "description": "Sales and e-commerce operations",
+      "source": "./enterprise-business/sales",
+      "version": "1.0.0",
+      "strict": true
+    },
+    {
+      "name": "strategy",
+      "description": "Business strategy and competitive advantage",
+      "source": "./enterprise-business/strategy",
+      "version": "1.0.0",
+      "strict": true
+    },
+    {
+      "name": "brainstorming",
+      "description": "Creative ideation methodology",
+      "source": "./enterprise-creative/brainstorming",
+      "version": "1.0.0",
+      "strict": true
+    },
+    {
+      "name": "deckbuilder-roguelike",
+      "description": "StS-like card roguelike design",
+      "source": "./enterprise-creative/deckbuilder-roguelike",
+      "version": "1.0.0",
+      "strict": true
+    },
+    {
+      "name": "galgame-master",
+      "description": "Galgame visual novel creation",
+      "source": "./enterprise-creative/galgame-master",
+      "version": "1.0.0",
+      "strict": true
+    },
+    {
+      "name": "game-design",
+      "description": "Game design and level balancing",
+      "source": "./enterprise-creative/game-design",
+      "version": "1.0.0",
+      "strict": true
+    },
+    {
+      "name": "game-planner",
+      "description": "Game planning GDD documents",
+      "source": "./enterprise-creative/game-planner",
+      "version": "1.0.0",
+      "strict": true
+    },
+    {
+      "name": "storytelling",
+      "description": "Story creation and narrative",
+      "source": "./enterprise-creative/storytelling",
+      "version": "1.0.0",
+      "strict": true
+    },
+    {
+      "name": "ui-ux-design",
+      "description": "UI/UX interface and experience design",
+      "source": "./enterprise-creative/ui-ux-design",
+      "version": "1.0.0",
+      "strict": true
+    },
+    {
+      "name": "visual-media",
+      "description": "Visual media production",
+      "source": "./enterprise-creative/visual-media",
+      "version": "1.0.0",
+      "strict": true
+    },
+    {
+      "name": "investment-analysis",
+      "description": "Investment analysis and valuation",
+      "source": "./enterprise-finance/investment-analysis",
+      "version": "1.0.0",
+      "strict": true
+    },
+    {
+      "name": "quant-trading",
+      "description": "Quantitative trading strategy development",
+      "source": "./enterprise-finance/quant-trading",
+      "version": "1.0.0",
+      "strict": true
+    },
+    {
+      "name": "strategy-optimization",
+      "description": "Trading strategy optimization",
+      "source": "./enterprise-finance/strategy-optimization",
+      "version": "1.0.0",
+      "strict": true
+    },
+    {
+      "name": "personal-growth",
+      "description": "Personal growth and career development",
+      "source": "./enterprise-lifestyle/personal-growth",
+      "version": "1.0.0",
+      "strict": true
+    },
+    {
+      "name": "side-income",
+      "description": "Side income and financial freedom",
+      "source": "./enterprise-lifestyle/side-income",
+      "version": "1.0.0",
+      "strict": true
+    },
+    {
+      "name": "consistency-checker",
+      "description": "Content consistency checker",
+      "source": "./enterprise-methodology/consistency-checker",
+      "version": "1.0.0",
+      "strict": true
+    },
+    {
+      "name": "knowledge-acquisition-4c",
+      "description": "Systematic learning methodology (4C)",
+      "source": "./enterprise-methodology/knowledge-acquisition-4c",
+      "version": "1.0.0",
+      "strict": true
+    },
+    {
+      "name": "skill-optimizer",
+      "description": "Skill optimization and token efficiency",
+      "source": "./enterprise-methodology/skill-optimizer",
+      "version": "1.0.0",
+      "strict": true
+    },
+    {
+      "name": "tech-spec-gen",
+      "description": "Design document to technical spec conversion",
+      "source": "./enterprise-methodology/tech-spec-gen",
+      "version": "1.0.0",
+      "strict": true
+    },
+    {
+      "name": "knowledge-management",
+      "description": "Personal knowledge management system",
+      "source": "./enterprise-professional/knowledge-management",
+      "version": "1.0.0",
+      "strict": true
+    },
+    {
+      "name": "research-analysis",
+      "description": "Research analysis methodology",
+      "source": "./enterprise-professional/research-analysis",
+      "version": "1.0.0",
+      "strict": true
+    }
+  ]
+}

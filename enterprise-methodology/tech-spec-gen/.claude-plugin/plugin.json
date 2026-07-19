@@ -1,0 +1,18 @@
+{
+  "name": "tech-spec-gen",
+  "description": "Design document to technical specification",
+  "version": "2.0.0",
+  "author": {
+    "name": "dheerajreddy01",
+    "email": "reddydheeraj94@gmail.com"
+  },
+  "homepage": "https://github.com/dheerajreddy01/claude-skills",
+  "repository": "https://github.com/dheerajreddy01/claude-skills",
+  "license": "MIT",
+  "keywords": [
+    "tech-spec-gen",
+    "tech-spec",
+    "technical specification",
+    "PRD conversion"
+  ]
+}
