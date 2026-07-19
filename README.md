@@ -1,9 +1,9 @@
 # Claude Skills — Enterprise Edition
 
-> A governed library of domain-expertise packs that turns Claude into a specialist across business, finance, creative, professional services, lifestyle, methodology, programming languages, and cloud platforms.
+> A governed library of domain-expertise packs that turns Claude into a specialist across business, finance, creative, professional services, lifestyle, methodology, programming languages, cloud platforms, and developer tooling.
 
-[![Skills](https://img.shields.io/badge/skills-32-blue)](./README.md)
-[![Domains](https://img.shields.io/badge/domains-8-green)](./README.md)
+[![Skills](https://img.shields.io/badge/skills-38-blue)](./README.md)
+[![Domains](https://img.shields.io/badge/domains-9-green)](./README.md)
 [![Version](https://img.shields.io/badge/version-2.0.0-informational)](./SKILL.md)
 [![Plugin](https://img.shields.io/badge/Claude_Code-Plugin-orange)](https://code.claude.com/docs/en/discover-plugins)
 [![License](https://img.shields.io/badge/license-MIT-lightgrey)](./LICENSE)
@@ -20,9 +20,9 @@
 │   │ Professional │  │  Lifestyle   │  │  Methodology │         │
 │   └──────────────┘  └──────────────┘  └──────────────┘         │
 │                                                                 │
-│   ┌──────────────┐  ┌──────────────┐                           │
-│   │  Languages   │  │    Cloud     │                           │
-│   └──────────────┘  └──────────────┘                           │
+│   ┌──────────────┐  ┌──────────────┐  ┌──────────────┐         │
+│   │  Languages   │  │    Cloud     │  │   DevTools   │         │
+│   └──────────────┘  └──────────────┘  └──────────────┘         │
 │                                                                 │
 │         Claude auto-detects the task → loads the matching      │
 │                    domain knowledge pack                        │
@@ -45,7 +45,7 @@
 
 ## Overview
 
-This repository is a structured library of **32 domain-expertise skills**, organized into **8 categories** spanning both non-technical domains (business, finance, creative, professional, lifestyle, methodology) and technical domains (programming languages, cloud platforms). Each skill packages the frameworks, formulas, checklists, and pitfalls a specialist in that field would bring to a task — so that Claude can apply them on demand instead of answering from generic knowledge alone.
+This repository is a structured library of **38 domain-expertise skills**, organized into **9 categories** spanning both non-technical domains (business, finance, creative, professional, lifestyle, methodology) and technical domains (programming languages, cloud platforms, developer tooling). Each skill packages the frameworks, formulas, checklists, and pitfalls a specialist in that field would bring to a task — so that Claude can apply them on demand instead of answering from generic knowledge alone.
 
 Every skill is designed to:
 - Be **auto-loaded** based on task keywords (via the `/evolve` skill or the `triggers` mechanism)
@@ -69,6 +69,7 @@ Generic LLM responses to domain questions ("how do I value this stock," "how do 
 | **enterprise-methodology/** | knowledge-acquisition-4c, tech-spec-gen, skill-optimizer, consistency-checker | Development methodology |
 | **enterprise-languages/** | python, javascript, go, rust, java | Programming languages |
 | **enterprise-cloud/** | aws, azure, gcp | Cloud platforms |
+| **enterprise-devtools/** | jira, splunk, new-relic, datadog, grafana-prometheus, pagerduty | Developer & ops tooling |
 
 ### Full Skill Index
 
@@ -106,6 +107,12 @@ Generic LLM responses to domain questions ("how do I value this stock," "how do 
 | `enterprise-cloud/aws` | aws, ec2, s3, lambda, iam | AWS architecture and security practices |
 | `enterprise-cloud/azure` | azure, azure functions, app service, entra id | Azure architecture and security practices |
 | `enterprise-cloud/gcp` | gcp, google cloud, cloud run, bigquery | Google Cloud architecture and security practices |
+| `enterprise-devtools/jira` | jira, sprint, backlog, JQL | Jira issue tracking and workflow administration |
+| `enterprise-devtools/splunk` | splunk, SPL, index, log search | Splunk architecture and search optimization |
+| `enterprise-devtools/new-relic` | new relic, NRQL, APM, distributed tracing | New Relic APM and alerting practices |
+| `enterprise-devtools/datadog` | datadog, monitor, unified service tagging | Datadog tagging strategy and cost management |
+| `enterprise-devtools/grafana-prometheus` | grafana, prometheus, promql, alertmanager | Prometheus/Grafana metrics and dashboard practices |
+| `enterprise-devtools/pagerduty` | pagerduty, on-call, escalation policy | PagerDuty on-call and incident response practices |
 
 ## Installation
 
@@ -124,6 +131,7 @@ Generic LLM responses to domain questions ("how do I value this stock," "how do 
 /plugin install game-design@claude-skills
 /plugin install python@claude-skills
 /plugin install aws@claude-skills
+/plugin install datadog@claude-skills
 
 # Or just mention a skill's subject in conversation — Claude will load it automatically
 ```
@@ -310,7 +318,7 @@ Before submitting a new skill, run it against the [Governance & Quality Bar](#go
 ```
 claude-skills/
 ├── .claude-plugin/              # Plugin marketplace configuration
-│   └── marketplace.json         # Lists all 32 skills as standalone plugins
+│   └── marketplace.json         # Lists all 38 skills as standalone plugins
 ├── enterprise-business/         # Business operations (5 skills)
 ├── enterprise-finance/          # Finance (3 skills)
 ├── enterprise-creative/         # Creative work (8 skills)
@@ -319,6 +327,7 @@ claude-skills/
 ├── enterprise-methodology/      # Methodology (4 skills)
 ├── enterprise-languages/        # Programming languages (5 skills)
 ├── enterprise-cloud/            # Cloud platforms (3 skills)
+├── enterprise-devtools/         # Developer & ops tooling (6 skills)
 ├── interfaces/                  # Cross-domain → technical handoff definitions
 ├── docs/                        # Quickstart and supporting documentation
 ├── SKILL-TEMPLATE.md            # Skill creation template

@@ -232,6 +232,48 @@
       "source": "./enterprise-cloud/gcp",
       "version": "1.0.0",
       "strict": true
+    },
+    {
+      "name": "jira",
+      "description": "Jira issue tracking, workflows, JQL, and agile board administration",
+      "source": "./enterprise-devtools/jira",
+      "version": "1.0.0",
+      "strict": true
+    },
+    {
+      "name": "splunk",
+      "description": "Splunk architecture, SPL search, index design, and license/cost management",
+      "source": "./enterprise-devtools/splunk",
+      "version": "1.0.0",
+      "strict": true
+    },
+    {
+      "name": "new-relic",
+      "description": "New Relic APM, NRQL, distributed tracing, and alerting practices",
+      "source": "./enterprise-devtools/new-relic",
+      "version": "1.0.0",
+      "strict": true
+    },
+    {
+      "name": "datadog",
+      "description": "Datadog metrics/logs/APM tagging strategy, monitors, and cost management",
+      "source": "./enterprise-devtools/datadog",
+      "version": "1.0.0",
+      "strict": true
+    },
+    {
+      "name": "grafana-prometheus",
+      "description": "Prometheus metrics/PromQL, Alertmanager, and Grafana dashboard practices",
+      "source": "./enterprise-devtools/grafana-prometheus",
+      "version": "1.0.0",
+      "strict": true
+    },
+    {
+      "name": "pagerduty",
+      "description": "PagerDuty on-call scheduling, escalation policies, and incident response practices",
+      "source": "./enterprise-devtools/pagerduty",
+      "version": "1.0.0",
+      "strict": true
     }
   ]
 }
