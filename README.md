@@ -1,9 +1,9 @@
 # Claude Skills — Enterprise Edition
 
-> A governed library of domain-expertise packs that turns Claude into a specialist across business, finance, creative, professional services, lifestyle, and methodology work.
+> A governed library of domain-expertise packs that turns Claude into a specialist across business, finance, creative, professional services, lifestyle, methodology, programming languages, and cloud platforms.
 
-[![Skills](https://img.shields.io/badge/skills-24-blue)](./README.md)
-[![Domains](https://img.shields.io/badge/domains-6-green)](./README.md)
+[![Skills](https://img.shields.io/badge/skills-32-blue)](./README.md)
+[![Domains](https://img.shields.io/badge/domains-8-green)](./README.md)
 [![Version](https://img.shields.io/badge/version-2.0.0-informational)](./SKILL.md)
 [![Plugin](https://img.shields.io/badge/Claude_Code-Plugin-orange)](https://code.claude.com/docs/en/discover-plugins)
 [![License](https://img.shields.io/badge/license-MIT-lightgrey)](./LICENSE)
@@ -19,6 +19,10 @@
 │   ┌──────────────┐  ┌──────────────┐  ┌──────────────┐         │
 │   │ Professional │  │  Lifestyle   │  │  Methodology │         │
 │   └──────────────┘  └──────────────┘  └──────────────┘         │
+│                                                                 │
+│   ┌──────────────┐  ┌──────────────┐                           │
+│   │  Languages   │  │    Cloud     │                           │
+│   └──────────────┘  └──────────────┘                           │
 │                                                                 │
 │         Claude auto-detects the task → loads the matching      │
 │                    domain knowledge pack                        │
@@ -41,7 +45,7 @@
 
 ## Overview
 
-This repository is a structured library of **24 non-technical domain-expertise skills**, organized into **6 categories**. Each skill packages the frameworks, formulas, checklists, and pitfalls a specialist in that field would bring to a task — so that Claude can apply them on demand instead of answering from generic knowledge alone.
+This repository is a structured library of **32 domain-expertise skills**, organized into **8 categories** spanning both non-technical domains (business, finance, creative, professional, lifestyle, methodology) and technical domains (programming languages, cloud platforms). Each skill packages the frameworks, formulas, checklists, and pitfalls a specialist in that field would bring to a task — so that Claude can apply them on demand instead of answering from generic knowledge alone.
 
 Every skill is designed to:
 - Be **auto-loaded** based on task keywords (via the `/evolve` skill or the `triggers` mechanism)
@@ -63,6 +67,8 @@ Generic LLM responses to domain questions ("how do I value this stock," "how do 
 | **enterprise-professional/** | research-analysis, knowledge-management | Professional services |
 | **enterprise-lifestyle/** | personal-growth, side-income | Lifestyle |
 | **enterprise-methodology/** | knowledge-acquisition-4c, tech-spec-gen, skill-optimizer, consistency-checker | Development methodology |
+| **enterprise-languages/** | python, javascript, go, rust, java | Programming languages |
+| **enterprise-cloud/** | aws, azure, gcp | Cloud platforms |
 
 ### Full Skill Index
 
@@ -92,6 +98,14 @@ Generic LLM responses to domain questions ("how do I value this stock," "how do 
 | `enterprise-methodology/tech-spec-gen` | tech-spec, technical spec, design-to-spec, PRD | Design document → technical spec conversion |
 | `enterprise-methodology/skill-optimizer` | skill optimization, reduce tokens, skill trimming | Skill optimization and token efficiency |
 | `enterprise-methodology/consistency-checker` | check, consistency, verify, sync | Content consistency checker |
+| `enterprise-languages/python` | python, django, fastapi, pandas | Python language and production practices |
+| `enterprise-languages/javascript` | javascript, typescript, node, react | JavaScript/TypeScript and Node.js production practices |
+| `enterprise-languages/go` | golang, go, goroutine, channel | Go language and concurrency practices |
+| `enterprise-languages/rust` | rust, cargo, ownership, borrow checker | Rust ownership model and systems practices |
+| `enterprise-languages/java` | java, jvm, spring, maven | Java, JVM, and Spring ecosystem practices |
+| `enterprise-cloud/aws` | aws, ec2, s3, lambda, iam | AWS architecture and security practices |
+| `enterprise-cloud/azure` | azure, azure functions, app service, entra id | Azure architecture and security practices |
+| `enterprise-cloud/gcp` | gcp, google cloud, cloud run, bigquery | Google Cloud architecture and security practices |
 
 ## Installation
 
@@ -108,6 +122,8 @@ Generic LLM responses to domain questions ("how do I value this stock," "how do 
 /plugin install marketing@claude-skills
 /plugin install quant-trading@claude-skills
 /plugin install game-design@claude-skills
+/plugin install python@claude-skills
+/plugin install aws@claude-skills
 
 # Or just mention a skill's subject in conversation — Claude will load it automatically
 ```
@@ -294,13 +310,15 @@ Before submitting a new skill, run it against the [Governance & Quality Bar](#go
 ```
 claude-skills/
 ├── .claude-plugin/              # Plugin marketplace configuration
-│   └── marketplace.json         # Lists all 24 skills as standalone plugins
+│   └── marketplace.json         # Lists all 32 skills as standalone plugins
 ├── enterprise-business/         # Business operations (5 skills)
 ├── enterprise-finance/          # Finance (3 skills)
 ├── enterprise-creative/         # Creative work (8 skills)
 ├── enterprise-professional/     # Professional services (2 skills)
 ├── enterprise-lifestyle/        # Lifestyle (2 skills)
 ├── enterprise-methodology/      # Methodology (4 skills)
+├── enterprise-languages/        # Programming languages (5 skills)
+├── enterprise-cloud/            # Cloud platforms (3 skills)
 ├── interfaces/                  # Cross-domain → technical handoff definitions
 ├── docs/                        # Quickstart and supporting documentation
 ├── SKILL-TEMPLATE.md            # Skill creation template

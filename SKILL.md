@@ -2,9 +2,9 @@
 schema: "1.0"
 name: claude-skills
 version: "2.0.0"
-description: A collection of non-technical domain expertise covering business, finance, creative, professional services, lifestyle, and methodology - 18 domains in total
-triggers: [domain, professional, knowledge, business, finance, creative, lifestyle]
-keywords: [domain, skills, knowledge, business, finance, creative, professional, lifestyle]
+description: A collection of domain expertise covering business, finance, creative, professional services, lifestyle, methodology, programming languages, and cloud platforms - 26 domains in total
+triggers: [domain, professional, knowledge, business, finance, creative, lifestyle, language, cloud]
+keywords: [domain, skills, knowledge, business, finance, creative, professional, lifestyle, languages, cloud]
 author: dheerajreddy01
 ---
 
@@ -14,12 +14,12 @@ author: dheerajreddy01
 
 ## Overview
 
-This is a library of non-technical domain expertise, designed to:
+This is a library of domain expertise — spanning both non-technical fields and technical domains like programming languages and cloud platforms — designed to:
 - Work together with the `/evolve` skill to automatically identify the domain a task needs
 - Load specific domain knowledge on demand via skillpkg
 - Provide frameworks, methodologies, and best practices for each domain
 
-## Available Domains (18)
+## Available Domains (26)
 
 ### 💰 Finance
 | Domain | Triggers | Description |
@@ -62,6 +62,22 @@ This is a library of non-technical domain expertise, designed to:
 | Domain | Triggers | Description |
 |------|--------|------|
 | `enterprise-methodology/knowledge-acquisition-4c` | learning, research, new domain, knowledge acquisition | Systematic learning from novice to expert |
+
+### 🔧 Languages
+| Domain | Triggers | Description |
+|------|--------|------|
+| `enterprise-languages/python` | python, django, fastapi, pandas | Python language and production practices |
+| `enterprise-languages/javascript` | javascript, typescript, node, react | JavaScript/TypeScript and Node.js production practices |
+| `enterprise-languages/go` | golang, go, goroutine, channel | Go language and concurrency practices |
+| `enterprise-languages/rust` | rust, cargo, ownership, borrow checker | Rust ownership model and systems practices |
+| `enterprise-languages/java` | java, jvm, spring, maven | Java, JVM, and Spring ecosystem practices |
+
+### ☁️ Cloud
+| Domain | Triggers | Description |
+|------|--------|------|
+| `enterprise-cloud/aws` | aws, ec2, s3, lambda, iam | AWS architecture and security practices |
+| `enterprise-cloud/azure` | azure, azure functions, app service, entra id | Azure architecture and security practices |
+| `enterprise-cloud/gcp` | gcp, google cloud, cloud run, bigquery | Google Cloud architecture and security practices |
 
 ## Usage
 

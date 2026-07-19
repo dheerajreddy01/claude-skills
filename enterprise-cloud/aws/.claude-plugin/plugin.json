@@ -1,0 +1,19 @@
+{
+  "name": "aws",
+  "description": "AWS architecture, IAM security, cost management, and Well-Architected practices",
+  "version": "1.0.0",
+  "author": {
+    "name": "dheerajreddy01",
+    "email": "reddydheeraj94@gmail.com"
+  },
+  "homepage": "https://github.com/dheerajreddy01/claude-skills",
+  "repository": "https://github.com/dheerajreddy01/claude-skills",
+  "license": "MIT",
+  "keywords": [
+    "aws",
+    "ec2",
+    "s3",
+    "lambda",
+    "iam"
+  ]
+}
