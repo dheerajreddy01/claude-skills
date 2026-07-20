@@ -774,9 +774,9 @@
     },
     {
       "name": "director-pipeline",
-      "description": "Director to Developer to Tester staged handoff workflow",
+      "description": "Director (HLD/LLD design) to Developer to Tester staged handoff workflow",
       "source": "./enterprise-methodology/director-pipeline",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "strict": true
     }
   ]

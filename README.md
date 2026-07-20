@@ -99,7 +99,7 @@ Generic LLM responses to domain questions ("how do I value this stock," "how do 
 | `enterprise-methodology/tech-spec-gen` | tech-spec, technical spec, design-to-spec, PRD | Design document → technical spec conversion |
 | `enterprise-methodology/skill-optimizer` | skill optimization, reduce tokens, skill trimming | Skill optimization and token efficiency |
 | `enterprise-methodology/consistency-checker` | check, consistency, verify, sync | Content consistency checker |
-| `enterprise-methodology/director-pipeline` | director pipeline, director dev tester, staged handoff, role pipeline | Director→Dev→Tester staged handoff workflow with acceptance-criteria-driven feedback loop |
+| `enterprise-methodology/director-pipeline` | director pipeline, director dev tester, HLD LLD design, staged handoff | Director (HLD→LLD design) → Dev → Tester staged handoff workflow with acceptance-criteria-driven feedback loop |
 | `enterprise-languages/python` | python, django, fastapi, pandas | Python language and production practices |
 | `enterprise-languages/javascript` | javascript, typescript, node, react | JavaScript/TypeScript and Node.js production practices |
 | `enterprise-languages/go` | golang, go, goroutine, channel | Go language and concurrency practices |

@@ -62,7 +62,7 @@ This is a library of domain expertise — spanning both non-technical fields and
 | Domain | Triggers | Description |
 |------|--------|------|
 | `enterprise-methodology/knowledge-acquisition-4c` | learning, research, new domain, knowledge acquisition | Systematic learning from novice to expert |
-| `enterprise-methodology/director-pipeline` | director pipeline, director dev tester, staged handoff, role pipeline | Director→Dev→Tester staged handoff workflow with acceptance-criteria-driven feedback loop |
+| `enterprise-methodology/director-pipeline` | director pipeline, director dev tester, HLD LLD design, staged handoff | Director (HLD→LLD design) → Dev → Tester staged handoff workflow with acceptance-criteria-driven feedback loop |
 
 ### 🔧 Languages
 | Domain | Triggers | Description |

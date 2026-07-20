@@ -1,15 +1,15 @@
 ---
 name: director-pipeline
-version: 1.0.0
-description: Director → Developer → Tester handoff pipeline — a staged, document-driven workflow for turning a raw request into verified, shipped work instead of one continuous "prompt and pray" pass
-triggers: [director pipeline, director dev tester, staged handoff, role pipeline, spec build test]
-keywords: [workflow, methodology, multi-agent, handoff, quality-gate, spec-driven, acceptance-criteria]
+version: 1.1.0
+description: Director → Developer → Tester handoff pipeline — a staged, document-driven workflow that carries a request through HLD/LLD design before build, and through verified, shipped work instead of one continuous "prompt and pray" pass
+triggers: [director pipeline, director dev tester, staged handoff, role pipeline, spec build test, HLD LLD design, high-level design low-level design]
+keywords: [workflow, methodology, multi-agent, handoff, quality-gate, spec-driven, acceptance-criteria, HLD, LLD, architecture-design]
 author: claude-domain-skills
 ---
 
-# Director → Dev → Tester Pipeline v1.0.0
+# Director → Dev → Tester Pipeline v1.1.0
 
-> Split any task into three roles with a written handoff between each — Director plans, Dev builds, Tester verifies, and gaps loop back instead of getting silently absorbed
+> Split any task into three roles with a written handoff between each — Director designs (HLD → LLD) and plans, Dev builds, Tester verifies, and gaps loop back instead of getting silently absorbed
 
 ## Quick Start
 
@@ -39,8 +39,8 @@ This generalizes the "requirements handshake" pattern used in staged design pipe
 
 | Role | Job | Reads | Produces |
 |------|------|------|------|
-| **Director** | Analyze the request, resolve ambiguity, define scope and acceptance criteria | The raw task/prompt only | `director-brief.md` |
-| **Dev** | Implement exactly what the brief specifies | `director-brief.md` only | Working code + `dev-log.md` |
+| **Director** | Analyze the request, resolve ambiguity, design the solution (HLD → LLD), define scope and acceptance criteria | The raw task/prompt only | `director-brief.md` (including HLD + LLD) |
+| **Dev** | Implement exactly what the brief's HLD/LLD and acceptance criteria specify | `director-brief.md` only | Working code + `dev-log.md` |
 | **Tester** | Verify the implementation against the brief's acceptance criteria | `director-brief.md` + `dev-log.md` + the actual code | `test-report.md` |
 
 **Critical rule**: Dev never talks to Director directly, and Tester never grades against what Dev *meant* to build — only against what the brief actually says. If the brief itself is wrong or incomplete, that's a finding that routes back to Director, not something Dev or Tester quietly patches over.
@@ -54,7 +54,7 @@ Raw request
     │
     ▼
 ┌─────────────┐
-│  DIRECTOR   │  Analyze → clarify ambiguity → define scope, non-goals, acceptance criteria
+│  DIRECTOR   │  Analyze → clarify ambiguity → HLD (components) → LLD (details) → scope, non-goals, acceptance criteria
 └─────────────┘
     │  director-brief.md
     ▼
@@ -90,9 +90,14 @@ Each arrow is a **checkpoint**: the receiving role should not start until the pr
 **Responsibilities**:
 - Restate the request in your own words to surface hidden assumptions
 - Identify what's explicitly in scope, and just as importantly, what's **out of scope** (non-goals)
-- Enumerate edge cases and failure modes the request doesn't mention but implies
-- Convert vague goals into specific, checkable acceptance criteria (Given-When-Then form where possible)
+- Design the solution in two passes, coarse to fine, **before** writing acceptance criteria:
+  - **HLD (High-Level Design)** — the architecture pass: what components/modules exist, what each is responsible for, how data flows between them, and the key architectural decisions (sync vs. async, where state lives, what's a new component vs. an extension of an existing one)
+  - **LLD (Low-Level Design)** — the implementation-detail pass, grounded in the HLD: data models/schemas, API/function contracts (inputs, outputs, error cases), core algorithms or business logic, and the sequence of operations for each key flow
+- Enumerate edge cases and failure modes the request doesn't mention but implies — the LLD pass is what usually surfaces these, since they show up as unhandled branches in a data model or flow
+- Convert the design into specific, checkable acceptance criteria (Given-When-Then form where possible) — the HLD/LLD should make criteria easy to write precisely, not vaguely
 - Flag any decision that genuinely needs a human call instead of silently picking one
+
+**Scale the design depth to the task.** A one-line bug fix or copy change needs neither HLD nor LLD — write "N/A, trivial change" and move on. A new endpoint on an existing service usually needs a light LLD only (the HLD is just "extends the existing service," not worth its own section). A new service, a cross-cutting change, or anything touching multiple components warrants both passes in full — that's where skipping them causes Dev to invent architecture mid-implementation instead of Director having decided it upfront.
 
 **Output — `director-brief.md`**:
 ```markdown
@@ -106,6 +111,31 @@ Each arrow is a **checkpoint**: the receiving role should not start until the pr
 
 ## Out of Scope (Non-Goals)
 - ...
+
+## High-Level Design (HLD)
+[N/A for trivial changes — otherwise:]
+### Components
+- [Component/module name]: [its responsibility]
+
+### Data Flow
+- [How data/requests move between components for the key flows]
+
+### Key Architectural Decisions
+- [Decision]: [what was chosen and why, e.g. sync call vs. queued job]
+
+## Low-Level Design (LLD)
+[N/A for trivial changes — otherwise:]
+### Data Model / Schema
+- [Entity/table/struct]: [fields, types, constraints]
+
+### API / Function Contracts
+- [Endpoint or function signature]: [inputs] → [outputs], [error cases]
+
+### Core Logic / Algorithms
+- [Any non-obvious logic worth specifying before Dev writes it]
+
+### Sequence for Key Flows
+- [Step-by-step order of operations for the flows that matter]
 
 ## Acceptance Criteria
 - [ ] AC-1: Given ___, when ___, then ___
@@ -124,8 +154,9 @@ Each arrow is a **checkpoint**: the receiving role should not start until the pr
 
 **Responsibilities**:
 - Implement strictly against the brief's scope — do not add unrequested features, do not skip in-scope ones
+- Follow the LLD's data model, API contracts, and algorithms as specified rather than re-deriving your own design — if the LLD is genuinely wrong or infeasible (not just a different style preference), that's a deviation to log, not a silent rewrite
 - Where the brief is ambiguous *and* has no open question flagged for it, take the most literal reading and document the interpretation (don't silently guess and hide it)
-- Note any deviation from the brief and why (e.g., a constraint the brief didn't anticipate)
+- Note any deviation from the brief — including the HLD/LLD — and why (e.g., a constraint the brief didn't anticipate)
 
 **Output — `dev-log.md`**:
 ```markdown
@@ -214,6 +245,9 @@ If running everything in one continuous session instead, at minimum: write each 
 ## 6. Quality Gates
 
 **Before Dev starts:**
+- [ ] Task complexity assessed and design depth matched to it (trivial → N/A; anything multi-component or architecturally significant → full HLD + LLD)
+- [ ] HLD names every component involved and its responsibility, with no "TBD" left for Dev to resolve
+- [ ] LLD specifies data models/API contracts/algorithms concretely enough that Dev isn't inventing structure while also writing code
 - [ ] Every acceptance criterion is independently checkable (not "make it good")
 - [ ] Out-of-scope items are explicit, not just omitted
 - [ ] Every open question is either answered or explicitly deferred to a human
@@ -234,7 +268,10 @@ If running everything in one continuous session instead, at minimum: write each 
 | Pitfall | Why it breaks the pipeline | Fix |
 |------|------|------|
 | Director writes goals, not checkable criteria ("make the UI nice") | Tester has nothing concrete to verify against | Rewrite every criterion in Given-When-Then form |
-| Dev reads the brief once, then works from memory | Implementation drifts from the brief over a long task | Re-read the brief at the start of each major sub-task |
+| Director skips HLD/LLD on a multi-component task and jumps straight to acceptance criteria | Dev ends up inventing the architecture mid-implementation, causing rework when Director's mental model turns out different | Design HLD (components, data flow) then LLD (schemas, contracts, algorithms) before writing criteria, for anything beyond a trivial change |
+| Director writes a full HLD/LLD for a one-line fix | Wastes a round-trip on ceremony the task doesn't need | Scale design depth to task complexity — "N/A, trivial change" is a valid HLD/LLD section |
+| Dev reads the brief once, then works from memory | Implementation drifts from the brief (and its HLD/LLD) over a long task | Re-read the brief at the start of each major sub-task |
+| Dev disagrees with the LLD and silently implements something different | Tester verifies against a brief that no longer matches what was built, and the mismatch surfaces late | Log it as a deviation with rationale — let Tester/Director see the divergence, don't hide it |
 | Tester grades against the dev log's description instead of the actual code | Bugs the developer didn't notice never get caught | Tester must independently exercise the acceptance criteria, not read a summary |
 | Findings get fixed ad hoc without updating the brief | The same ambiguity resurfaces in the next round | Route requirements gaps to Director first, always |
 | The loop has no defined exit condition | Endless back-and-forth with no ship decision | Define "done" via §6's quality gates, not a feeling |
@@ -252,9 +289,10 @@ If running everything in one continuous session instead, at minimum: write each 
 ## Why It Matters
 
 1. **Catches misunderstood requirements before they're built**, not after
-2. **Forces edge cases into the open** instead of leaving them to whichever role happens to think of them
-3. **Gives feedback a specific place to attach** — a named acceptance criterion — instead of a vague "this feels off"
-4. **Makes "done" a checklist, not a feeling** — every criterion PASS or an explicit, accepted gap
+2. **Separates architecture from implementation detail** — HLD decides the shape of the solution, LLD decides its concrete mechanics, so Dev isn't inventing structure while also writing code
+3. **Forces edge cases into the open** instead of leaving them to whichever role happens to think of them
+4. **Gives feedback a specific place to attach** — a named acceptance criterion — instead of a vague "this feels off"
+5. **Makes "done" a checklist, not a feeling** — every criterion PASS or an explicit, accepted gap
 
 ---
 
@@ -262,4 +300,5 @@ If running everything in one continuous session instead, at minimum: write each 
 
 | Version | Date | Changes |
 |------|------|------|
+| 1.1.0 | 2026-07-20 | Director stage now explicitly designs HLD (components, data flow, architectural decisions) then LLD (data models, API contracts, algorithms, sequences) before writing acceptance criteria, scaled to task complexity |
 | 1.0.0 | 2026-07-20 | Initial version |
