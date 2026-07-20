@@ -2,7 +2,7 @@
 schema: "1.0"
 name: claude-skills
 version: "2.0.0"
-description: A collection of domain expertise covering business, finance, creative, professional services, lifestyle, methodology, programming languages, cloud platforms, and developer tooling - 86 domains in total
+description: A collection of domain expertise covering business, finance, creative, professional services, lifestyle, methodology, programming languages, cloud platforms, and developer tooling - 103 domains in total
 triggers: [domain, professional, knowledge, business, finance, creative, lifestyle, language, cloud, devtools]
 keywords: [domain, skills, knowledge, business, finance, creative, professional, lifestyle, languages, cloud, devtools]
 author: dheerajreddy01
@@ -19,7 +19,7 @@ This is a library of domain expertise — spanning both non-technical fields and
 - Load specific domain knowledge on demand via skillpkg
 - Provide frameworks, methodologies, and best practices for each domain
 
-## Available Domains (86)
+## Available Domains (103)
 
 ### 💰 Finance
 | Domain | Triggers | Description |
@@ -80,6 +80,11 @@ This is a library of domain expertise — spanning both non-technical fields and
 | `enterprise-languages/scala` | scala, akka, spark, sbt | Scala functional/OOP hybrid, implicit resolution, and JVM concurrency practices |
 | `enterprise-languages/r` | r language, rstudio, tidyverse, ggplot2 | R vectorized computing, tidyverse workflows, and statistical data practices |
 | `enterprise-languages/elixir` | elixir, phoenix, erlang, BEAM | Elixir/BEAM concurrency, OTP supervision, and Phoenix production practices |
+| `enterprise-languages/dart-flutter` | dart, flutter, widget, statefulwidget | Dart/Flutter widget lifecycle, state management, and async production practices |
+| `enterprise-languages/bash` | bash, shell script, shell scripting, sh | Bash/shell scripting quoting discipline, error handling, and portability practices |
+| `enterprise-languages/haskell` | haskell, cabal, stack, ghc | Haskell laziness, type system, and functional programming production practices |
+| `enterprise-languages/lua` | lua, luajit, metatable, coroutine | Lua tables, metatables, coroutines, and embedded-scripting production practices |
+| `enterprise-languages/zig` | zig, comptime, allocator, error union | Zig manual memory management, comptime, and error-union production practices |
 
 ### ☁️ Cloud
 | Domain | Triggers | Description |
@@ -91,6 +96,9 @@ This is a library of domain expertise — spanning both non-technical fields and
 | `enterprise-cloud/vercel-netlify` | vercel, netlify, jamstack, edge function | Vercel/Netlify serverless functions, preview deployments, and JAMstack build practices |
 | `enterprise-cloud/digitalocean` | digitalocean, droplet, DO, app platform | DigitalOcean Droplets, App Platform, and simplified cloud infrastructure practices |
 | `enterprise-cloud/oracle-cloud` | oracle cloud, OCI, autonomous database, compartment | Oracle Cloud Infrastructure compartments, IAM policy language, and Autonomous Database practices |
+| `enterprise-cloud/firebase` | firebase, firestore, cloud functions for firebase, firebase auth | Firebase Firestore, security rules, and Cloud Functions platform expertise |
+| `enterprise-cloud/supabase` | supabase, row level security, RLS, supabase auth | Supabase Postgres, Row Level Security, and realtime/auto-API platform expertise |
+| `enterprise-cloud/heroku-flyio-render` | heroku, fly.io, flyio, render | Heroku, Fly.io, and Render simple-PaaS deployment practices |
 
 ### 🛠️ DevTools
 | Domain | Triggers | Description |
@@ -142,6 +150,15 @@ This is a library of domain expertise — spanning both non-technical fields and
 | `enterprise-devtools/openapi-graphql` | openapi, swagger, graphql, api design | OpenAPI/Swagger REST contract design and GraphQL schema/resolver practices |
 | `enterprise-devtools/helm` | helm, helm chart, kubernetes package manager, values.yaml | Helm chart structure, templating, and release lifecycle practices |
 | `enterprise-devtools/openshift` | openshift, okd, red hat kubernetes, security context constraint | OpenShift/OKD security context constraints, Routes, and Operator-based platform practices |
+| `enterprise-devtools/nginx` | nginx, reverse proxy, load balancer, location block | Nginx reverse proxy, load balancing, and web server configuration practices |
+| `enterprise-devtools/istio-linkerd` | istio, linkerd, service mesh, sidecar | Istio and Linkerd service mesh traffic management, mTLS, and operational practices |
+| `enterprise-devtools/airflow` | airflow, DAG, apache airflow, task idempotency | Apache Airflow DAG design, task idempotency, and scheduler operational practices |
+| `enterprise-devtools/dbt` | dbt, data build tool, dbt model, dbt run | dbt (data build tool) model design, DAG dependencies, and incremental transformation practices |
+| `enterprise-devtools/spark` | spark, apache spark, pyspark, spark job | Apache Spark partitioning, shuffle performance, and distributed job reliability practices |
+| `enterprise-devtools/opentelemetry` | opentelemetry, otel, otel collector, instrumentation | OpenTelemetry instrumentation, context propagation, and Collector pipeline practices |
+| `enterprise-devtools/vector-databases` | vector database, pinecone, weaviate, pgvector | Vector database (Pinecone/Weaviate/pgvector) embedding search, indexing, and RAG chunking practices |
+| `enterprise-devtools/launchdarkly` | launchdarkly, feature flag, feature toggle, unleash | LaunchDarkly feature flag rollout strategy, targeting, and flag lifecycle hygiene practices |
+| `enterprise-devtools/chaos-engineering` | chaos engineering, gremlin, chaos mesh, fault injection | Chaos engineering experiment design, blast radius control, and resilience validation practices |
 
 ## Usage
 

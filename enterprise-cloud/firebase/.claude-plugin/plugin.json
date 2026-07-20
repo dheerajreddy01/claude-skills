@@ -1,0 +1,13 @@
+{
+  "name": "firebase",
+  "description": "Firebase Firestore, security rules, and Cloud Functions platform expertise",
+  "version": "1.0.0",
+  "author": {
+    "name": "dheerajreddy01",
+    "email": "reddydheeraj94@gmail.com"
+  },
+  "homepage": "https://github.com/dheerajreddy01/claude-skills",
+  "repository": "https://github.com/dheerajreddy01/claude-skills",
+  "license": "MIT",
+  "keywords": ["firebase", "firestore", "backend-as-a-service", "cloud-functions"]
+}

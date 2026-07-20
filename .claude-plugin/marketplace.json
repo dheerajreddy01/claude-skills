@@ -652,6 +652,125 @@
       "source": "./enterprise-devtools/openshift",
       "version": "1.0.0",
       "strict": true
+    },
+    {
+      "name": "dart-flutter",
+      "description": "Dart/Flutter widget lifecycle, state management, and async production practices",
+      "source": "./enterprise-languages/dart-flutter",
+      "version": "1.0.0",
+      "strict": true
+    },
+    {
+      "name": "bash",
+      "description": "Bash/shell scripting quoting discipline, error handling, and portability practices",
+      "source": "./enterprise-languages/bash",
+      "version": "1.0.0",
+      "strict": true
+    },
+    {
+      "name": "haskell",
+      "description": "Haskell laziness, type system, and functional programming production practices",
+      "source": "./enterprise-languages/haskell",
+      "version": "1.0.0",
+      "strict": true
+    },
+    {
+      "name": "lua",
+      "description": "Lua tables, metatables, coroutines, and embedded-scripting production practices",
+      "source": "./enterprise-languages/lua",
+      "version": "1.0.0",
+      "strict": true
+    },
+    {
+      "name": "zig",
+      "description": "Zig manual memory management, comptime, and error-union production practices",
+      "source": "./enterprise-languages/zig",
+      "version": "1.0.0",
+      "strict": true
+    },
+    {
+      "name": "firebase",
+      "description": "Firebase Firestore, security rules, and Cloud Functions platform expertise",
+      "source": "./enterprise-cloud/firebase",
+      "version": "1.0.0",
+      "strict": true
+    },
+    {
+      "name": "supabase",
+      "description": "Supabase Postgres, Row Level Security, and realtime/auto-API platform expertise",
+      "source": "./enterprise-cloud/supabase",
+      "version": "1.0.0",
+      "strict": true
+    },
+    {
+      "name": "heroku-flyio-render",
+      "description": "Heroku, Fly.io, and Render simple-PaaS deployment practices",
+      "source": "./enterprise-cloud/heroku-flyio-render",
+      "version": "1.0.0",
+      "strict": true
+    },
+    {
+      "name": "nginx",
+      "description": "Nginx reverse proxy, load balancing, and web server configuration practices",
+      "source": "./enterprise-devtools/nginx",
+      "version": "1.0.0",
+      "strict": true
+    },
+    {
+      "name": "istio-linkerd",
+      "description": "Istio and Linkerd service mesh traffic management, mTLS, and operational practices",
+      "source": "./enterprise-devtools/istio-linkerd",
+      "version": "1.0.0",
+      "strict": true
+    },
+    {
+      "name": "airflow",
+      "description": "Apache Airflow DAG design, task idempotency, and scheduler operational practices",
+      "source": "./enterprise-devtools/airflow",
+      "version": "1.0.0",
+      "strict": true
+    },
+    {
+      "name": "dbt",
+      "description": "dbt (data build tool) model design, DAG dependencies, and incremental transformation practices",
+      "source": "./enterprise-devtools/dbt",
+      "version": "1.0.0",
+      "strict": true
+    },
+    {
+      "name": "spark",
+      "description": "Apache Spark partitioning, shuffle performance, and distributed job reliability practices",
+      "source": "./enterprise-devtools/spark",
+      "version": "1.0.0",
+      "strict": true
+    },
+    {
+      "name": "opentelemetry",
+      "description": "OpenTelemetry instrumentation, context propagation, and Collector pipeline practices",
+      "source": "./enterprise-devtools/opentelemetry",
+      "version": "1.0.0",
+      "strict": true
+    },
+    {
+      "name": "vector-databases",
+      "description": "Vector database (Pinecone/Weaviate/pgvector) embedding search, indexing, and RAG chunking practices",
+      "source": "./enterprise-devtools/vector-databases",
+      "version": "1.0.0",
+      "strict": true
+    },
+    {
+      "name": "launchdarkly",
+      "description": "LaunchDarkly feature flag rollout strategy, targeting, and flag lifecycle hygiene practices",
+      "source": "./enterprise-devtools/launchdarkly",
+      "version": "1.0.0",
+      "strict": true
+    },
+    {
+      "name": "chaos-engineering",
+      "description": "Chaos engineering experiment design, blast radius control, and resilience validation practices",
+      "source": "./enterprise-devtools/chaos-engineering",
+      "version": "1.0.0",
+      "strict": true
     }
   ]
 }

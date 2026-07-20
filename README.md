@@ -2,7 +2,7 @@
 
 > A governed library of domain-expertise packs that turns Claude into a specialist across business, finance, creative, professional services, lifestyle, methodology, programming languages, cloud platforms, and developer tooling.
 
-[![Skills](https://img.shields.io/badge/skills-92-blue)](./README.md)
+[![Skills](https://img.shields.io/badge/skills-109-blue)](./README.md)
 [![Domains](https://img.shields.io/badge/domains-9-green)](./README.md)
 [![Version](https://img.shields.io/badge/version-2.0.0-informational)](./SKILL.md)
 [![Plugin](https://img.shields.io/badge/Claude_Code-Plugin-orange)](https://code.claude.com/docs/en/discover-plugins)
@@ -45,7 +45,7 @@
 
 ## Overview
 
-This repository is a structured library of **92 domain-expertise skills**, organized into **9 categories** spanning both non-technical domains (business, finance, creative, professional, lifestyle, methodology) and technical domains (programming languages, cloud platforms, developer tooling). Each skill packages the frameworks, formulas, checklists, and pitfalls a specialist in that field would bring to a task — so that Claude can apply them on demand instead of answering from generic knowledge alone.
+This repository is a structured library of **109 domain-expertise skills**, organized into **9 categories** spanning both non-technical domains (business, finance, creative, professional, lifestyle, methodology) and technical domains (programming languages, cloud platforms, developer tooling). Each skill packages the frameworks, formulas, checklists, and pitfalls a specialist in that field would bring to a task — so that Claude can apply them on demand instead of answering from generic knowledge alone.
 
 Every skill is designed to:
 - Be **auto-loaded** based on task keywords (via the `/evolve` skill or the `triggers` mechanism)
@@ -67,9 +67,9 @@ Generic LLM responses to domain questions ("how do I value this stock," "how do 
 | **enterprise-professional/** | research-analysis, knowledge-management | Professional services |
 | **enterprise-lifestyle/** | personal-growth, side-income | Lifestyle |
 | **enterprise-methodology/** | knowledge-acquisition-4c, tech-spec-gen, skill-optimizer, consistency-checker | Development methodology |
-| **enterprise-languages/** | python, javascript, go, rust, java, csharp, cpp, php, ruby, swift, kotlin, scala, r, elixir | Programming languages |
-| **enterprise-cloud/** | aws, azure, gcp, cloudflare, vercel-netlify, digitalocean, oracle-cloud | Cloud platforms |
-| **enterprise-devtools/** | jira, splunk, new-relic, datadog, grafana-prometheus, pagerduty, docker, kubernetes, git, github-actions, terraform, postgresql, redis, mongodb, postman, mysql, rabbitmq, elasticsearch, kafka, jenkins, gitlab, circleci, argocd-flux, ansible, pulumi, cloudformation, playwright-cypress, k6-jmeter, vault, okta-auth0, sonarqube, snyk, confluence, slack, linear, notion, sentry, honeycomb, sqlite, cassandra, dynamodb, clickhouse, snowflake, nats, openapi-graphql, helm, openshift | Developer & ops tooling |
+| **enterprise-languages/** | python, javascript, go, rust, java, csharp, cpp, php, ruby, swift, kotlin, scala, r, elixir, dart-flutter, bash, haskell, lua, zig | Programming languages |
+| **enterprise-cloud/** | aws, azure, gcp, cloudflare, vercel-netlify, digitalocean, oracle-cloud, firebase, supabase, heroku-flyio-render | Cloud platforms |
+| **enterprise-devtools/** | jira, splunk, new-relic, datadog, grafana-prometheus, pagerduty, docker, kubernetes, git, github-actions, terraform, postgresql, redis, mongodb, postman, mysql, rabbitmq, elasticsearch, kafka, jenkins, gitlab, circleci, argocd-flux, ansible, pulumi, cloudformation, playwright-cypress, k6-jmeter, vault, okta-auth0, sonarqube, snyk, confluence, slack, linear, notion, sentry, honeycomb, sqlite, cassandra, dynamodb, clickhouse, snowflake, nats, openapi-graphql, helm, openshift, nginx, istio-linkerd, airflow, dbt, spark, opentelemetry, vector-databases, launchdarkly, chaos-engineering | Developer & ops tooling |
 
 ### Full Skill Index
 
@@ -167,6 +167,23 @@ Generic LLM responses to domain questions ("how do I value this stock," "how do 
 | `enterprise-devtools/openapi-graphql` | openapi, swagger, graphql, api design | OpenAPI/Swagger REST contract design and GraphQL schema/resolver practices |
 | `enterprise-devtools/helm` | helm, helm chart, kubernetes package manager, values.yaml | Helm chart structure, templating, and release lifecycle practices |
 | `enterprise-devtools/openshift` | openshift, okd, red hat kubernetes, security context constraint | OpenShift/OKD security context constraints, Routes, and Operator-based platform practices |
+| `enterprise-languages/dart-flutter` | dart, flutter, widget, statefulwidget | Dart/Flutter widget lifecycle, state management, and async production practices |
+| `enterprise-languages/bash` | bash, shell script, shell scripting, sh | Bash/shell scripting quoting discipline, error handling, and portability practices |
+| `enterprise-languages/haskell` | haskell, cabal, stack, ghc | Haskell laziness, type system, and functional programming production practices |
+| `enterprise-languages/lua` | lua, luajit, metatable, coroutine | Lua tables, metatables, coroutines, and embedded-scripting production practices |
+| `enterprise-languages/zig` | zig, comptime, allocator, error union | Zig manual memory management, comptime, and error-union production practices |
+| `enterprise-cloud/firebase` | firebase, firestore, cloud functions for firebase, firebase auth | Firebase Firestore, security rules, and Cloud Functions platform expertise |
+| `enterprise-cloud/supabase` | supabase, row level security, RLS, supabase auth | Supabase Postgres, Row Level Security, and realtime/auto-API platform expertise |
+| `enterprise-cloud/heroku-flyio-render` | heroku, fly.io, flyio, render | Heroku, Fly.io, and Render simple-PaaS deployment practices |
+| `enterprise-devtools/nginx` | nginx, reverse proxy, load balancer, location block | Nginx reverse proxy, load balancing, and web server configuration practices |
+| `enterprise-devtools/istio-linkerd` | istio, linkerd, service mesh, sidecar | Istio and Linkerd service mesh traffic management, mTLS, and operational practices |
+| `enterprise-devtools/airflow` | airflow, DAG, apache airflow, task idempotency | Apache Airflow DAG design, task idempotency, and scheduler operational practices |
+| `enterprise-devtools/dbt` | dbt, data build tool, dbt model, dbt run | dbt (data build tool) model design, DAG dependencies, and incremental transformation practices |
+| `enterprise-devtools/spark` | spark, apache spark, pyspark, spark job | Apache Spark partitioning, shuffle performance, and distributed job reliability practices |
+| `enterprise-devtools/opentelemetry` | opentelemetry, otel, otel collector, instrumentation | OpenTelemetry instrumentation, context propagation, and Collector pipeline practices |
+| `enterprise-devtools/vector-databases` | vector database, pinecone, weaviate, pgvector | Vector database (Pinecone/Weaviate/pgvector) embedding search, indexing, and RAG chunking practices |
+| `enterprise-devtools/launchdarkly` | launchdarkly, feature flag, feature toggle, unleash | LaunchDarkly feature flag rollout strategy, targeting, and flag lifecycle hygiene practices |
+| `enterprise-devtools/chaos-engineering` | chaos engineering, gremlin, chaos mesh, fault injection | Chaos engineering experiment design, blast radius control, and resilience validation practices |
 
 ## Installation
 
@@ -193,6 +210,8 @@ Generic LLM responses to domain questions ("how do I value this stock," "how do 
 /plugin install cloudflare@claude-skills
 /plugin install ansible@claude-skills
 /plugin install dynamodb@claude-skills
+/plugin install airflow@claude-skills
+/plugin install vector-databases@claude-skills
 
 # Or just mention a skill's subject in conversation — Claude will load it automatically
 ```
@@ -379,16 +398,16 @@ Before submitting a new skill, run it against the [Governance & Quality Bar](#go
 ```
 claude-skills/
 ├── .claude-plugin/              # Plugin marketplace configuration
-│   └── marketplace.json         # Lists all 92 skills as standalone plugins
+│   └── marketplace.json         # Lists all 109 skills as standalone plugins
 ├── enterprise-business/         # Business operations (5 skills)
 ├── enterprise-finance/          # Finance (3 skills)
 ├── enterprise-creative/         # Creative work (8 skills)
 ├── enterprise-professional/     # Professional services (2 skills)
 ├── enterprise-lifestyle/        # Lifestyle (2 skills)
 ├── enterprise-methodology/      # Methodology (4 skills)
-├── enterprise-languages/        # Programming languages (14 skills)
-├── enterprise-cloud/            # Cloud platforms (7 skills)
-├── enterprise-devtools/         # Developer & ops tooling (47 skills)
+├── enterprise-languages/        # Programming languages (19 skills)
+├── enterprise-cloud/            # Cloud platforms (10 skills)
+├── enterprise-devtools/         # Developer & ops tooling (56 skills)
 ├── interfaces/                  # Cross-domain → technical handoff definitions
 ├── docs/                        # Quickstart and supporting documentation
 ├── SKILL-TEMPLATE.md            # Skill creation template
