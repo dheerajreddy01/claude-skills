@@ -337,6 +337,20 @@
       "source": "./enterprise-devtools/postman",
       "version": "1.0.0",
       "strict": true
+    },
+    {
+      "name": "mysql",
+      "description": "MySQL/InnoDB indexing, isolation levels, replication, and operational practices",
+      "source": "./enterprise-devtools/mysql",
+      "version": "1.0.0",
+      "strict": true
+    },
+    {
+      "name": "rabbitmq",
+      "description": "RabbitMQ exchange/queue topology, delivery guarantees, and broker reliability practices",
+      "source": "./enterprise-devtools/rabbitmq",
+      "version": "1.0.0",
+      "strict": true
     }
   ]
 }

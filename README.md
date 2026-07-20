@@ -2,7 +2,7 @@
 
 > A governed library of domain-expertise packs that turns Claude into a specialist across business, finance, creative, professional services, lifestyle, methodology, programming languages, cloud platforms, and developer tooling.
 
-[![Skills](https://img.shields.io/badge/skills-47-blue)](./README.md)
+[![Skills](https://img.shields.io/badge/skills-49-blue)](./README.md)
 [![Domains](https://img.shields.io/badge/domains-9-green)](./README.md)
 [![Version](https://img.shields.io/badge/version-2.0.0-informational)](./SKILL.md)
 [![Plugin](https://img.shields.io/badge/Claude_Code-Plugin-orange)](https://code.claude.com/docs/en/discover-plugins)
@@ -45,7 +45,7 @@
 
 ## Overview
 
-This repository is a structured library of **47 domain-expertise skills**, organized into **9 categories** spanning both non-technical domains (business, finance, creative, professional, lifestyle, methodology) and technical domains (programming languages, cloud platforms, developer tooling). Each skill packages the frameworks, formulas, checklists, and pitfalls a specialist in that field would bring to a task — so that Claude can apply them on demand instead of answering from generic knowledge alone.
+This repository is a structured library of **49 domain-expertise skills**, organized into **9 categories** spanning both non-technical domains (business, finance, creative, professional, lifestyle, methodology) and technical domains (programming languages, cloud platforms, developer tooling). Each skill packages the frameworks, formulas, checklists, and pitfalls a specialist in that field would bring to a task — so that Claude can apply them on demand instead of answering from generic knowledge alone.
 
 Every skill is designed to:
 - Be **auto-loaded** based on task keywords (via the `/evolve` skill or the `triggers` mechanism)
@@ -69,7 +69,7 @@ Generic LLM responses to domain questions ("how do I value this stock," "how do 
 | **enterprise-methodology/** | knowledge-acquisition-4c, tech-spec-gen, skill-optimizer, consistency-checker | Development methodology |
 | **enterprise-languages/** | python, javascript, go, rust, java | Programming languages |
 | **enterprise-cloud/** | aws, azure, gcp | Cloud platforms |
-| **enterprise-devtools/** | jira, splunk, new-relic, datadog, grafana-prometheus, pagerduty, docker, kubernetes, git, github-actions, terraform, postgresql, redis, mongodb, postman | Developer & ops tooling |
+| **enterprise-devtools/** | jira, splunk, new-relic, datadog, grafana-prometheus, pagerduty, docker, kubernetes, git, github-actions, terraform, postgresql, redis, mongodb, postman, mysql, rabbitmq | Developer & ops tooling |
 
 ### Full Skill Index
 
@@ -122,6 +122,8 @@ Generic LLM responses to domain questions ("how do I value this stock," "how do 
 | `enterprise-devtools/redis` | redis, cache, key-value, TTL | Redis data structures and cache reliability practices |
 | `enterprise-devtools/mongodb` | mongodb, document database, aggregation pipeline | MongoDB schema design and aggregation practices |
 | `enterprise-devtools/postman` | postman, API testing, collection, newman | Postman collection design and CI-driven API testing |
+| `enterprise-devtools/mysql` | mysql, mariadb, innodb, EXPLAIN | MySQL/InnoDB indexing and replication practices |
+| `enterprise-devtools/rabbitmq` | rabbitmq, message queue, AMQP, exchange | RabbitMQ topology and delivery guarantee practices |
 
 ## Installation
 
@@ -143,6 +145,7 @@ Generic LLM responses to domain questions ("how do I value this stock," "how do 
 /plugin install datadog@claude-skills
 /plugin install kubernetes@claude-skills
 /plugin install terraform@claude-skills
+/plugin install rabbitmq@claude-skills
 
 # Or just mention a skill's subject in conversation — Claude will load it automatically
 ```
@@ -329,7 +332,7 @@ Before submitting a new skill, run it against the [Governance & Quality Bar](#go
 ```
 claude-skills/
 ├── .claude-plugin/              # Plugin marketplace configuration
-│   └── marketplace.json         # Lists all 47 skills as standalone plugins
+│   └── marketplace.json         # Lists all 49 skills as standalone plugins
 ├── enterprise-business/         # Business operations (5 skills)
 ├── enterprise-finance/          # Finance (3 skills)
 ├── enterprise-creative/         # Creative work (8 skills)
@@ -338,7 +341,7 @@ claude-skills/
 ├── enterprise-methodology/      # Methodology (4 skills)
 ├── enterprise-languages/        # Programming languages (5 skills)
 ├── enterprise-cloud/            # Cloud platforms (3 skills)
-├── enterprise-devtools/         # Developer & ops tooling (15 skills)
+├── enterprise-devtools/         # Developer & ops tooling (17 skills)
 ├── interfaces/                  # Cross-domain → technical handoff definitions
 ├── docs/                        # Quickstart and supporting documentation
 ├── SKILL-TEMPLATE.md            # Skill creation template
