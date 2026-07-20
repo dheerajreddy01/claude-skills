@@ -771,6 +771,13 @@
       "source": "./enterprise-devtools/chaos-engineering",
       "version": "1.0.0",
       "strict": true
+    },
+    {
+      "name": "director-pipeline",
+      "description": "Director to Developer to Tester staged handoff workflow",
+      "source": "./enterprise-methodology/director-pipeline",
+      "version": "1.0.0",
+      "strict": true
     }
   ]
 }

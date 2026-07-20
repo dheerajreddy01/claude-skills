@@ -2,7 +2,7 @@
 schema: "1.0"
 name: claude-skills
 version: "2.0.0"
-description: A collection of domain expertise covering business, finance, creative, professional services, lifestyle, methodology, programming languages, cloud platforms, and developer tooling - 103 domains in total
+description: A collection of domain expertise covering business, finance, creative, professional services, lifestyle, methodology, programming languages, cloud platforms, and developer tooling - 104 domains in total
 triggers: [domain, professional, knowledge, business, finance, creative, lifestyle, language, cloud, devtools]
 keywords: [domain, skills, knowledge, business, finance, creative, professional, lifestyle, languages, cloud, devtools]
 author: dheerajreddy01
@@ -19,7 +19,7 @@ This is a library of domain expertise — spanning both non-technical fields and
 - Load specific domain knowledge on demand via skillpkg
 - Provide frameworks, methodologies, and best practices for each domain
 
-## Available Domains (103)
+## Available Domains (104)
 
 ### 💰 Finance
 | Domain | Triggers | Description |
@@ -62,6 +62,7 @@ This is a library of domain expertise — spanning both non-technical fields and
 | Domain | Triggers | Description |
 |------|--------|------|
 | `enterprise-methodology/knowledge-acquisition-4c` | learning, research, new domain, knowledge acquisition | Systematic learning from novice to expert |
+| `enterprise-methodology/director-pipeline` | director pipeline, director dev tester, staged handoff, role pipeline | Director→Dev→Tester staged handoff workflow with acceptance-criteria-driven feedback loop |
 
 ### 🔧 Languages
 | Domain | Triggers | Description |

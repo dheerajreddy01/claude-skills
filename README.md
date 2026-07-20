@@ -2,7 +2,7 @@
 
 > A governed library of domain-expertise packs that turns Claude into a specialist across business, finance, creative, professional services, lifestyle, methodology, programming languages, cloud platforms, and developer tooling.
 
-[![Skills](https://img.shields.io/badge/skills-109-blue)](./README.md)
+[![Skills](https://img.shields.io/badge/skills-110-blue)](./README.md)
 [![Domains](https://img.shields.io/badge/domains-9-green)](./README.md)
 [![Version](https://img.shields.io/badge/version-2.0.0-informational)](./SKILL.md)
 [![Plugin](https://img.shields.io/badge/Claude_Code-Plugin-orange)](https://code.claude.com/docs/en/discover-plugins)
@@ -45,7 +45,7 @@
 
 ## Overview
 
-This repository is a structured library of **109 domain-expertise skills**, organized into **9 categories** spanning both non-technical domains (business, finance, creative, professional, lifestyle, methodology) and technical domains (programming languages, cloud platforms, developer tooling). Each skill packages the frameworks, formulas, checklists, and pitfalls a specialist in that field would bring to a task — so that Claude can apply them on demand instead of answering from generic knowledge alone.
+This repository is a structured library of **110 domain-expertise skills**, organized into **9 categories** spanning both non-technical domains (business, finance, creative, professional, lifestyle, methodology) and technical domains (programming languages, cloud platforms, developer tooling). Each skill packages the frameworks, formulas, checklists, and pitfalls a specialist in that field would bring to a task — so that Claude can apply them on demand instead of answering from generic knowledge alone.
 
 Every skill is designed to:
 - Be **auto-loaded** based on task keywords (via the `/evolve` skill or the `triggers` mechanism)
@@ -66,7 +66,7 @@ Generic LLM responses to domain questions ("how do I value this stock," "how do 
 | **enterprise-creative/** | game-design, game-planner, galgame-master, deckbuilder-roguelike, ui-ux-design, brainstorming, storytelling, visual-media | Creative work |
 | **enterprise-professional/** | research-analysis, knowledge-management | Professional services |
 | **enterprise-lifestyle/** | personal-growth, side-income | Lifestyle |
-| **enterprise-methodology/** | knowledge-acquisition-4c, tech-spec-gen, skill-optimizer, consistency-checker | Development methodology |
+| **enterprise-methodology/** | knowledge-acquisition-4c, tech-spec-gen, skill-optimizer, consistency-checker, director-pipeline | Development methodology |
 | **enterprise-languages/** | python, javascript, go, rust, java, csharp, cpp, php, ruby, swift, kotlin, scala, r, elixir, dart-flutter, bash, haskell, lua, zig | Programming languages |
 | **enterprise-cloud/** | aws, azure, gcp, cloudflare, vercel-netlify, digitalocean, oracle-cloud, firebase, supabase, heroku-flyio-render | Cloud platforms |
 | **enterprise-devtools/** | jira, splunk, new-relic, datadog, grafana-prometheus, pagerduty, docker, kubernetes, git, github-actions, terraform, postgresql, redis, mongodb, postman, mysql, rabbitmq, elasticsearch, kafka, jenkins, gitlab, circleci, argocd-flux, ansible, pulumi, cloudformation, playwright-cypress, k6-jmeter, vault, okta-auth0, sonarqube, snyk, confluence, slack, linear, notion, sentry, honeycomb, sqlite, cassandra, dynamodb, clickhouse, snowflake, nats, openapi-graphql, helm, openshift, nginx, istio-linkerd, airflow, dbt, spark, opentelemetry, vector-databases, launchdarkly, chaos-engineering | Developer & ops tooling |
@@ -99,6 +99,7 @@ Generic LLM responses to domain questions ("how do I value this stock," "how do 
 | `enterprise-methodology/tech-spec-gen` | tech-spec, technical spec, design-to-spec, PRD | Design document → technical spec conversion |
 | `enterprise-methodology/skill-optimizer` | skill optimization, reduce tokens, skill trimming | Skill optimization and token efficiency |
 | `enterprise-methodology/consistency-checker` | check, consistency, verify, sync | Content consistency checker |
+| `enterprise-methodology/director-pipeline` | director pipeline, director dev tester, staged handoff, role pipeline | Director→Dev→Tester staged handoff workflow with acceptance-criteria-driven feedback loop |
 | `enterprise-languages/python` | python, django, fastapi, pandas | Python language and production practices |
 | `enterprise-languages/javascript` | javascript, typescript, node, react | JavaScript/TypeScript and Node.js production practices |
 | `enterprise-languages/go` | golang, go, goroutine, channel | Go language and concurrency practices |
@@ -212,6 +213,7 @@ Generic LLM responses to domain questions ("how do I value this stock," "how do 
 /plugin install dynamodb@claude-skills
 /plugin install airflow@claude-skills
 /plugin install vector-databases@claude-skills
+/plugin install director-pipeline@claude-skills
 
 # Or just mention a skill's subject in conversation — Claude will load it automatically
 ```
@@ -398,13 +400,13 @@ Before submitting a new skill, run it against the [Governance & Quality Bar](#go
 ```
 claude-skills/
 ├── .claude-plugin/              # Plugin marketplace configuration
-│   └── marketplace.json         # Lists all 109 skills as standalone plugins
+│   └── marketplace.json         # Lists all 110 skills as standalone plugins
 ├── enterprise-business/         # Business operations (5 skills)
 ├── enterprise-finance/          # Finance (3 skills)
 ├── enterprise-creative/         # Creative work (8 skills)
 ├── enterprise-professional/     # Professional services (2 skills)
 ├── enterprise-lifestyle/        # Lifestyle (2 skills)
-├── enterprise-methodology/      # Methodology (4 skills)
+├── enterprise-methodology/      # Methodology (5 skills)
 ├── enterprise-languages/        # Programming languages (19 skills)
 ├── enterprise-cloud/            # Cloud platforms (10 skills)
 ├── enterprise-devtools/         # Developer & ops tooling (56 skills)
