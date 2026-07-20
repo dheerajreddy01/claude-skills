@@ -1,0 +1,18 @@
+{
+  "name": "sentry",
+  "description": "Sentry error grouping, source maps, and alerting/PII hygiene practices",
+  "version": "1.0.0",
+  "author": {
+    "name": "dheerajreddy01",
+    "email": "reddydheeraj94@gmail.com"
+  },
+  "homepage": "https://github.com/dheerajreddy01/claude-skills",
+  "repository": "https://github.com/dheerajreddy01/claude-skills",
+  "license": "MIT",
+  "keywords": [
+    "sentry",
+    "error-tracking",
+    "observability",
+    "source-maps"
+  ]
+}

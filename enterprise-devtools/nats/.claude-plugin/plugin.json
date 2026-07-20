@@ -1,0 +1,18 @@
+{
+  "name": "nats",
+  "description": "NATS and JetStream pub/sub design, delivery guarantees, and consumer reliability practices",
+  "version": "1.0.0",
+  "author": {
+    "name": "dheerajreddy01",
+    "email": "reddydheeraj94@gmail.com"
+  },
+  "homepage": "https://github.com/dheerajreddy01/claude-skills",
+  "repository": "https://github.com/dheerajreddy01/claude-skills",
+  "license": "MIT",
+  "keywords": [
+    "nats",
+    "jetstream",
+    "messaging",
+    "pub-sub"
+  ]
+}

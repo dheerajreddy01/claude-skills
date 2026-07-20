@@ -2,7 +2,7 @@
 
 > A governed library of domain-expertise packs that turns Claude into a specialist across business, finance, creative, professional services, lifestyle, methodology, programming languages, cloud platforms, and developer tooling.
 
-[![Skills](https://img.shields.io/badge/skills-51-blue)](./README.md)
+[![Skills](https://img.shields.io/badge/skills-92-blue)](./README.md)
 [![Domains](https://img.shields.io/badge/domains-9-green)](./README.md)
 [![Version](https://img.shields.io/badge/version-2.0.0-informational)](./SKILL.md)
 [![Plugin](https://img.shields.io/badge/Claude_Code-Plugin-orange)](https://code.claude.com/docs/en/discover-plugins)
@@ -45,7 +45,7 @@
 
 ## Overview
 
-This repository is a structured library of **51 domain-expertise skills**, organized into **9 categories** spanning both non-technical domains (business, finance, creative, professional, lifestyle, methodology) and technical domains (programming languages, cloud platforms, developer tooling). Each skill packages the frameworks, formulas, checklists, and pitfalls a specialist in that field would bring to a task — so that Claude can apply them on demand instead of answering from generic knowledge alone.
+This repository is a structured library of **92 domain-expertise skills**, organized into **9 categories** spanning both non-technical domains (business, finance, creative, professional, lifestyle, methodology) and technical domains (programming languages, cloud platforms, developer tooling). Each skill packages the frameworks, formulas, checklists, and pitfalls a specialist in that field would bring to a task — so that Claude can apply them on demand instead of answering from generic knowledge alone.
 
 Every skill is designed to:
 - Be **auto-loaded** based on task keywords (via the `/evolve` skill or the `triggers` mechanism)
@@ -67,9 +67,9 @@ Generic LLM responses to domain questions ("how do I value this stock," "how do 
 | **enterprise-professional/** | research-analysis, knowledge-management | Professional services |
 | **enterprise-lifestyle/** | personal-growth, side-income | Lifestyle |
 | **enterprise-methodology/** | knowledge-acquisition-4c, tech-spec-gen, skill-optimizer, consistency-checker | Development methodology |
-| **enterprise-languages/** | python, javascript, go, rust, java | Programming languages |
-| **enterprise-cloud/** | aws, azure, gcp | Cloud platforms |
-| **enterprise-devtools/** | jira, splunk, new-relic, datadog, grafana-prometheus, pagerduty, docker, kubernetes, git, github-actions, terraform, postgresql, redis, mongodb, postman, mysql, rabbitmq, elasticsearch, kafka | Developer & ops tooling |
+| **enterprise-languages/** | python, javascript, go, rust, java, csharp, cpp, php, ruby, swift, kotlin, scala, r, elixir | Programming languages |
+| **enterprise-cloud/** | aws, azure, gcp, cloudflare, vercel-netlify, digitalocean, oracle-cloud | Cloud platforms |
+| **enterprise-devtools/** | jira, splunk, new-relic, datadog, grafana-prometheus, pagerduty, docker, kubernetes, git, github-actions, terraform, postgresql, redis, mongodb, postman, mysql, rabbitmq, elasticsearch, kafka, jenkins, gitlab, circleci, argocd-flux, ansible, pulumi, cloudformation, playwright-cypress, k6-jmeter, vault, okta-auth0, sonarqube, snyk, confluence, slack, linear, notion, sentry, honeycomb, sqlite, cassandra, dynamodb, clickhouse, snowflake, nats, openapi-graphql, helm, openshift | Developer & ops tooling |
 
 ### Full Skill Index
 
@@ -126,6 +126,47 @@ Generic LLM responses to domain questions ("how do I value this stock," "how do 
 | `enterprise-devtools/rabbitmq` | rabbitmq, message queue, AMQP, exchange | RabbitMQ topology and delivery guarantee practices |
 | `enterprise-devtools/elasticsearch` | elasticsearch, opensearch, mapping, shard | Elasticsearch mapping design and query DSL practices |
 | `enterprise-devtools/kafka` | kafka, topic, partition, consumer group | Kafka partition design and consumer reliability practices |
+| `enterprise-languages/csharp` | csharp, c#, dotnet, .net | C#/.NET async patterns, DI lifetimes, and production practices |
+| `enterprise-languages/cpp` | c++, cpp, RAII, template | C++ RAII, ownership, undefined behavior, and build practices |
+| `enterprise-languages/php` | php, laravel, symfony, composer | PHP request lifecycle, type juggling, and Laravel/Symfony production practices |
+| `enterprise-languages/ruby` | ruby, rails, ruby on rails, gem | Ruby/Rails ActiveRecord, metaprogramming, and production practices |
+| `enterprise-languages/swift` | swift, ios, swiftui, xcode | Swift ARC, optionals, value types, and SwiftUI production practices |
+| `enterprise-languages/kotlin` | kotlin, android, jetpack compose, coroutine | Kotlin null safety, coroutines, and Android/JVM production practices |
+| `enterprise-languages/scala` | scala, akka, spark, sbt | Scala functional/OOP hybrid, implicit resolution, and JVM concurrency practices |
+| `enterprise-languages/r` | r language, rstudio, tidyverse, ggplot2 | R vectorized computing, tidyverse workflows, and statistical data practices |
+| `enterprise-languages/elixir` | elixir, phoenix, erlang, BEAM | Elixir/BEAM concurrency, OTP supervision, and Phoenix production practices |
+| `enterprise-cloud/cloudflare` | cloudflare, cloudflare workers, R2, CDN | Cloudflare Workers, R2, DNS/CDN/WAF, and edge platform practices |
+| `enterprise-cloud/vercel-netlify` | vercel, netlify, jamstack, edge function | Vercel/Netlify serverless functions, preview deployments, and JAMstack build practices |
+| `enterprise-cloud/digitalocean` | digitalocean, droplet, DO, app platform | DigitalOcean Droplets, App Platform, and simplified cloud infrastructure practices |
+| `enterprise-cloud/oracle-cloud` | oracle cloud, OCI, autonomous database, compartment | Oracle Cloud Infrastructure compartments, IAM policy language, and Autonomous Database practices |
+| `enterprise-devtools/jenkins` | jenkins, jenkinsfile, pipeline, groovy | Jenkins pipeline design, plugin management, and credential security practices |
+| `enterprise-devtools/gitlab` | gitlab, gitlab ci, .gitlab-ci.yml, merge request | GitLab CI/CD pipeline design, runner architecture, and integrated platform practices |
+| `enterprise-devtools/circleci` | circleci, circle ci, orb, workflow | CircleCI workflow design, orb usage, and caching/parallelism practices |
+| `enterprise-devtools/argocd-flux` | argocd, flux, gitops, continuous delivery | GitOps continuous delivery practices with ArgoCD and Flux |
+| `enterprise-devtools/ansible` | ansible, playbook, ansible-playbook, inventory | Ansible playbook design, idempotency discipline, and secrets management practices |
+| `enterprise-devtools/pulumi` | pulumi, infrastructure as code, pulumi stack | Pulumi infrastructure-as-code with general-purpose languages, state, and stack reference practices |
+| `enterprise-devtools/cloudformation` | cloudformation, cfn, cloudformation stack, cloudformation template | AWS CloudFormation template design, stack update safety, and drift management practices |
+| `enterprise-devtools/playwright-cypress` | playwright, cypress, e2e testing, end-to-end test | Playwright and Cypress end-to-end testing: automation model, flakiness, and CI reliability |
+| `enterprise-devtools/k6-jmeter` | k6, jmeter, load testing, performance testing | k6 and JMeter load testing: realistic traffic modeling and result interpretation |
+| `enterprise-devtools/vault` | vault, hashicorp vault, secrets management, dynamic secrets | HashiCorp Vault secrets engines, dynamic secrets, and unseal/HA practices |
+| `enterprise-devtools/okta-auth0` | okta, auth0, SSO, identity provider | Okta and Auth0 identity/SSO: OIDC/SAML, token handling, and MFA policy practices |
+| `enterprise-devtools/sonarqube` | sonarqube, static analysis, code quality, quality gate | SonarQube static analysis, quality gates, and code health practices |
+| `enterprise-devtools/snyk` | snyk, dependency vulnerability, SCA, container scanning | Snyk dependency, container, and license vulnerability scanning practices |
+| `enterprise-devtools/confluence` | confluence, wiki, documentation space, page tree | Confluence space design, page permissions, and documentation hygiene practices |
+| `enterprise-devtools/slack` | slack, slack bot, slack app, webhook | Slack workspace structure, app/bot permission scopes, and integration reliability practices |
+| `enterprise-devtools/linear` | linear, issue tracker, cycle, triage | Linear cycles, triage workflow, and opinionated issue-tracking practices |
+| `enterprise-devtools/notion` | notion, notion database, workspace, block | Notion workspace architecture, database design, and permission inheritance practices |
+| `enterprise-devtools/sentry` | sentry, error tracking, exception monitoring, source map | Sentry error grouping, source maps, and alerting/PII hygiene practices |
+| `enterprise-devtools/honeycomb` | honeycomb, observability, trace, high cardinality | Honeycomb high-cardinality observability, instrumentation, and sampling practices |
+| `enterprise-devtools/sqlite` | sqlite, embedded database, single-file database | SQLite embedded database concurrency, WAL mode, and appropriate-use practices |
+| `enterprise-devtools/cassandra` | cassandra, wide column, ring, gossip protocol | Apache Cassandra query-first data modeling, consistency levels, and ring architecture practices |
+| `enterprise-devtools/dynamodb` | dynamodb, single table design, partition key, GSI | DynamoDB single-table design, partition key strategy, and capacity/cost practices |
+| `enterprise-devtools/clickhouse` | clickhouse, OLAP, columnar database, MergeTree | ClickHouse columnar OLAP design, MergeTree engine practices, and query performance |
+| `enterprise-devtools/snowflake` | snowflake, data warehouse, virtual warehouse, snowpipe | Snowflake virtual warehouse cost management, micro-partitioning, and data recovery practices |
+| `enterprise-devtools/nats` | nats, jetstream, pub sub, subject | NATS and JetStream pub/sub design, delivery guarantees, and consumer reliability practices |
+| `enterprise-devtools/openapi-graphql` | openapi, swagger, graphql, api design | OpenAPI/Swagger REST contract design and GraphQL schema/resolver practices |
+| `enterprise-devtools/helm` | helm, helm chart, kubernetes package manager, values.yaml | Helm chart structure, templating, and release lifecycle practices |
+| `enterprise-devtools/openshift` | openshift, okd, red hat kubernetes, security context constraint | OpenShift/OKD security context constraints, Routes, and Operator-based platform practices |
 
 ## Installation
 
@@ -149,6 +190,9 @@ Generic LLM responses to domain questions ("how do I value this stock," "how do 
 /plugin install terraform@claude-skills
 /plugin install rabbitmq@claude-skills
 /plugin install kafka@claude-skills
+/plugin install cloudflare@claude-skills
+/plugin install ansible@claude-skills
+/plugin install dynamodb@claude-skills
 
 # Or just mention a skill's subject in conversation — Claude will load it automatically
 ```
@@ -335,16 +379,16 @@ Before submitting a new skill, run it against the [Governance & Quality Bar](#go
 ```
 claude-skills/
 ├── .claude-plugin/              # Plugin marketplace configuration
-│   └── marketplace.json         # Lists all 51 skills as standalone plugins
+│   └── marketplace.json         # Lists all 92 skills as standalone plugins
 ├── enterprise-business/         # Business operations (5 skills)
 ├── enterprise-finance/          # Finance (3 skills)
 ├── enterprise-creative/         # Creative work (8 skills)
 ├── enterprise-professional/     # Professional services (2 skills)
 ├── enterprise-lifestyle/        # Lifestyle (2 skills)
 ├── enterprise-methodology/      # Methodology (4 skills)
-├── enterprise-languages/        # Programming languages (5 skills)
-├── enterprise-cloud/            # Cloud platforms (3 skills)
-├── enterprise-devtools/         # Developer & ops tooling (19 skills)
+├── enterprise-languages/        # Programming languages (14 skills)
+├── enterprise-cloud/            # Cloud platforms (7 skills)
+├── enterprise-devtools/         # Developer & ops tooling (47 skills)
 ├── interfaces/                  # Cross-domain → technical handoff definitions
 ├── docs/                        # Quickstart and supporting documentation
 ├── SKILL-TEMPLATE.md            # Skill creation template

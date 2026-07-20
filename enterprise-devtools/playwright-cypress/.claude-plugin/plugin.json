@@ -1,0 +1,13 @@
+{
+  "name": "playwright-cypress",
+  "description": "Playwright and Cypress end-to-end testing: automation model, flakiness, and CI reliability",
+  "version": "1.0.0",
+  "author": {
+    "name": "dheerajreddy01",
+    "email": "reddydheeraj94@gmail.com"
+  },
+  "homepage": "https://github.com/dheerajreddy01/claude-skills",
+  "repository": "https://github.com/dheerajreddy01/claude-skills",
+  "license": "MIT",
+  "keywords": ["playwright", "cypress", "e2e-testing", "browser-automation"]
+}

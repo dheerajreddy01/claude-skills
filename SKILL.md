@@ -2,7 +2,7 @@
 schema: "1.0"
 name: claude-skills
 version: "2.0.0"
-description: A collection of domain expertise covering business, finance, creative, professional services, lifestyle, methodology, programming languages, cloud platforms, and developer tooling - 45 domains in total
+description: A collection of domain expertise covering business, finance, creative, professional services, lifestyle, methodology, programming languages, cloud platforms, and developer tooling - 86 domains in total
 triggers: [domain, professional, knowledge, business, finance, creative, lifestyle, language, cloud, devtools]
 keywords: [domain, skills, knowledge, business, finance, creative, professional, lifestyle, languages, cloud, devtools]
 author: dheerajreddy01
@@ -19,7 +19,7 @@ This is a library of domain expertise — spanning both non-technical fields and
 - Load specific domain knowledge on demand via skillpkg
 - Provide frameworks, methodologies, and best practices for each domain
 
-## Available Domains (45)
+## Available Domains (86)
 
 ### 💰 Finance
 | Domain | Triggers | Description |
@@ -71,6 +71,15 @@ This is a library of domain expertise — spanning both non-technical fields and
 | `enterprise-languages/go` | golang, go, goroutine, channel | Go language and concurrency practices |
 | `enterprise-languages/rust` | rust, cargo, ownership, borrow checker | Rust ownership model and systems practices |
 | `enterprise-languages/java` | java, jvm, spring, maven | Java, JVM, and Spring ecosystem practices |
+| `enterprise-languages/csharp` | csharp, c#, dotnet, .net | C#/.NET async patterns, DI lifetimes, and production practices |
+| `enterprise-languages/cpp` | c++, cpp, RAII, template | C++ RAII, ownership, undefined behavior, and build practices |
+| `enterprise-languages/php` | php, laravel, symfony, composer | PHP request lifecycle, type juggling, and Laravel/Symfony production practices |
+| `enterprise-languages/ruby` | ruby, rails, ruby on rails, gem | Ruby/Rails ActiveRecord, metaprogramming, and production practices |
+| `enterprise-languages/swift` | swift, ios, swiftui, xcode | Swift ARC, optionals, value types, and SwiftUI production practices |
+| `enterprise-languages/kotlin` | kotlin, android, jetpack compose, coroutine | Kotlin null safety, coroutines, and Android/JVM production practices |
+| `enterprise-languages/scala` | scala, akka, spark, sbt | Scala functional/OOP hybrid, implicit resolution, and JVM concurrency practices |
+| `enterprise-languages/r` | r language, rstudio, tidyverse, ggplot2 | R vectorized computing, tidyverse workflows, and statistical data practices |
+| `enterprise-languages/elixir` | elixir, phoenix, erlang, BEAM | Elixir/BEAM concurrency, OTP supervision, and Phoenix production practices |
 
 ### ☁️ Cloud
 | Domain | Triggers | Description |
@@ -78,6 +87,10 @@ This is a library of domain expertise — spanning both non-technical fields and
 | `enterprise-cloud/aws` | aws, ec2, s3, lambda, iam | AWS architecture and security practices |
 | `enterprise-cloud/azure` | azure, azure functions, app service, entra id | Azure architecture and security practices |
 | `enterprise-cloud/gcp` | gcp, google cloud, cloud run, bigquery | Google Cloud architecture and security practices |
+| `enterprise-cloud/cloudflare` | cloudflare, cloudflare workers, R2, CDN | Cloudflare Workers, R2, DNS/CDN/WAF, and edge platform practices |
+| `enterprise-cloud/vercel-netlify` | vercel, netlify, jamstack, edge function | Vercel/Netlify serverless functions, preview deployments, and JAMstack build practices |
+| `enterprise-cloud/digitalocean` | digitalocean, droplet, DO, app platform | DigitalOcean Droplets, App Platform, and simplified cloud infrastructure practices |
+| `enterprise-cloud/oracle-cloud` | oracle cloud, OCI, autonomous database, compartment | Oracle Cloud Infrastructure compartments, IAM policy language, and Autonomous Database practices |
 
 ### 🛠️ DevTools
 | Domain | Triggers | Description |
@@ -101,6 +114,34 @@ This is a library of domain expertise — spanning both non-technical fields and
 | `enterprise-devtools/rabbitmq` | rabbitmq, message queue, AMQP, exchange | RabbitMQ topology and delivery guarantee practices |
 | `enterprise-devtools/elasticsearch` | elasticsearch, opensearch, mapping, shard | Elasticsearch mapping design and query DSL practices |
 | `enterprise-devtools/kafka` | kafka, topic, partition, consumer group | Kafka partition design and consumer reliability practices |
+| `enterprise-devtools/jenkins` | jenkins, jenkinsfile, pipeline, groovy | Jenkins pipeline design, plugin management, and credential security practices |
+| `enterprise-devtools/gitlab` | gitlab, gitlab ci, .gitlab-ci.yml, merge request | GitLab CI/CD pipeline design, runner architecture, and integrated platform practices |
+| `enterprise-devtools/circleci` | circleci, circle ci, orb, workflow | CircleCI workflow design, orb usage, and caching/parallelism practices |
+| `enterprise-devtools/argocd-flux` | argocd, flux, gitops, continuous delivery | GitOps continuous delivery practices with ArgoCD and Flux |
+| `enterprise-devtools/ansible` | ansible, playbook, ansible-playbook, inventory | Ansible playbook design, idempotency discipline, and secrets management practices |
+| `enterprise-devtools/pulumi` | pulumi, infrastructure as code, pulumi stack | Pulumi infrastructure-as-code with general-purpose languages, state, and stack reference practices |
+| `enterprise-devtools/cloudformation` | cloudformation, cfn, cloudformation stack, cloudformation template | AWS CloudFormation template design, stack update safety, and drift management practices |
+| `enterprise-devtools/playwright-cypress` | playwright, cypress, e2e testing, end-to-end test | Playwright and Cypress end-to-end testing: automation model, flakiness, and CI reliability |
+| `enterprise-devtools/k6-jmeter` | k6, jmeter, load testing, performance testing | k6 and JMeter load testing: realistic traffic modeling and result interpretation |
+| `enterprise-devtools/vault` | vault, hashicorp vault, secrets management, dynamic secrets | HashiCorp Vault secrets engines, dynamic secrets, and unseal/HA practices |
+| `enterprise-devtools/okta-auth0` | okta, auth0, SSO, identity provider | Okta and Auth0 identity/SSO: OIDC/SAML, token handling, and MFA policy practices |
+| `enterprise-devtools/sonarqube` | sonarqube, static analysis, code quality, quality gate | SonarQube static analysis, quality gates, and code health practices |
+| `enterprise-devtools/snyk` | snyk, dependency vulnerability, SCA, container scanning | Snyk dependency, container, and license vulnerability scanning practices |
+| `enterprise-devtools/confluence` | confluence, wiki, documentation space, page tree | Confluence space design, page permissions, and documentation hygiene practices |
+| `enterprise-devtools/slack` | slack, slack bot, slack app, webhook | Slack workspace structure, app/bot permission scopes, and integration reliability practices |
+| `enterprise-devtools/linear` | linear, issue tracker, cycle, triage | Linear cycles, triage workflow, and opinionated issue-tracking practices |
+| `enterprise-devtools/notion` | notion, notion database, workspace, block | Notion workspace architecture, database design, and permission inheritance practices |
+| `enterprise-devtools/sentry` | sentry, error tracking, exception monitoring, source map | Sentry error grouping, source maps, and alerting/PII hygiene practices |
+| `enterprise-devtools/honeycomb` | honeycomb, observability, trace, high cardinality | Honeycomb high-cardinality observability, instrumentation, and sampling practices |
+| `enterprise-devtools/sqlite` | sqlite, embedded database, single-file database | SQLite embedded database concurrency, WAL mode, and appropriate-use practices |
+| `enterprise-devtools/cassandra` | cassandra, wide column, ring, gossip protocol | Apache Cassandra query-first data modeling, consistency levels, and ring architecture practices |
+| `enterprise-devtools/dynamodb` | dynamodb, single table design, partition key, GSI | DynamoDB single-table design, partition key strategy, and capacity/cost practices |
+| `enterprise-devtools/clickhouse` | clickhouse, OLAP, columnar database, MergeTree | ClickHouse columnar OLAP design, MergeTree engine practices, and query performance |
+| `enterprise-devtools/snowflake` | snowflake, data warehouse, virtual warehouse, snowpipe | Snowflake virtual warehouse cost management, micro-partitioning, and data recovery practices |
+| `enterprise-devtools/nats` | nats, jetstream, pub sub, subject | NATS and JetStream pub/sub design, delivery guarantees, and consumer reliability practices |
+| `enterprise-devtools/openapi-graphql` | openapi, swagger, graphql, api design | OpenAPI/Swagger REST contract design and GraphQL schema/resolver practices |
+| `enterprise-devtools/helm` | helm, helm chart, kubernetes package manager, values.yaml | Helm chart structure, templating, and release lifecycle practices |
+| `enterprise-devtools/openshift` | openshift, okd, red hat kubernetes, security context constraint | OpenShift/OKD security context constraints, Routes, and Operator-based platform practices |
 
 ## Usage
 

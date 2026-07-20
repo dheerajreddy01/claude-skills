@@ -1,0 +1,18 @@
+{
+  "name": "cassandra",
+  "description": "Apache Cassandra query-first data modeling, consistency levels, and ring architecture practices",
+  "version": "1.0.0",
+  "author": {
+    "name": "dheerajreddy01",
+    "email": "reddydheeraj94@gmail.com"
+  },
+  "homepage": "https://github.com/dheerajreddy01/claude-skills",
+  "repository": "https://github.com/dheerajreddy01/claude-skills",
+  "license": "MIT",
+  "keywords": [
+    "cassandra",
+    "wide-column",
+    "nosql",
+    "distributed-database"
+  ]
+}

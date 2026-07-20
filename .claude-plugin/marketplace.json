@@ -365,6 +365,293 @@
       "source": "./enterprise-devtools/kafka",
       "version": "1.0.0",
       "strict": true
+    },
+    {
+      "name": "csharp",
+      "description": "C#/.NET async patterns, DI lifetimes, and production practices",
+      "source": "./enterprise-languages/csharp",
+      "version": "1.0.0",
+      "strict": true
+    },
+    {
+      "name": "cpp",
+      "description": "C++ RAII, ownership, undefined behavior, and build practices",
+      "source": "./enterprise-languages/cpp",
+      "version": "1.0.0",
+      "strict": true
+    },
+    {
+      "name": "php",
+      "description": "PHP request lifecycle, type juggling, and Laravel/Symfony production practices",
+      "source": "./enterprise-languages/php",
+      "version": "1.0.0",
+      "strict": true
+    },
+    {
+      "name": "ruby",
+      "description": "Ruby/Rails ActiveRecord, metaprogramming, and production practices",
+      "source": "./enterprise-languages/ruby",
+      "version": "1.0.0",
+      "strict": true
+    },
+    {
+      "name": "swift",
+      "description": "Swift ARC, optionals, value types, and SwiftUI production practices",
+      "source": "./enterprise-languages/swift",
+      "version": "1.0.0",
+      "strict": true
+    },
+    {
+      "name": "kotlin",
+      "description": "Kotlin null safety, coroutines, and Android/JVM production practices",
+      "source": "./enterprise-languages/kotlin",
+      "version": "1.0.0",
+      "strict": true
+    },
+    {
+      "name": "scala",
+      "description": "Scala functional/OOP hybrid, implicit resolution, and JVM concurrency practices",
+      "source": "./enterprise-languages/scala",
+      "version": "1.0.0",
+      "strict": true
+    },
+    {
+      "name": "r",
+      "description": "R vectorized computing, tidyverse workflows, and statistical data practices",
+      "source": "./enterprise-languages/r",
+      "version": "1.0.0",
+      "strict": true
+    },
+    {
+      "name": "elixir",
+      "description": "Elixir/BEAM concurrency, OTP supervision, and Phoenix production practices",
+      "source": "./enterprise-languages/elixir",
+      "version": "1.0.0",
+      "strict": true
+    },
+    {
+      "name": "cloudflare",
+      "description": "Cloudflare Workers, R2, DNS/CDN/WAF, and edge platform practices",
+      "source": "./enterprise-cloud/cloudflare",
+      "version": "1.0.0",
+      "strict": true
+    },
+    {
+      "name": "vercel-netlify",
+      "description": "Vercel/Netlify serverless functions, preview deployments, and JAMstack build practices",
+      "source": "./enterprise-cloud/vercel-netlify",
+      "version": "1.0.0",
+      "strict": true
+    },
+    {
+      "name": "digitalocean",
+      "description": "DigitalOcean Droplets, App Platform, and simplified cloud infrastructure practices",
+      "source": "./enterprise-cloud/digitalocean",
+      "version": "1.0.0",
+      "strict": true
+    },
+    {
+      "name": "oracle-cloud",
+      "description": "Oracle Cloud Infrastructure compartments, IAM policy language, and Autonomous Database practices",
+      "source": "./enterprise-cloud/oracle-cloud",
+      "version": "1.0.0",
+      "strict": true
+    },
+    {
+      "name": "jenkins",
+      "description": "Jenkins pipeline design, plugin management, and credential security practices",
+      "source": "./enterprise-devtools/jenkins",
+      "version": "1.0.0",
+      "strict": true
+    },
+    {
+      "name": "gitlab",
+      "description": "GitLab CI/CD pipeline design, runner architecture, and integrated platform practices",
+      "source": "./enterprise-devtools/gitlab",
+      "version": "1.0.0",
+      "strict": true
+    },
+    {
+      "name": "circleci",
+      "description": "CircleCI workflow design, orb usage, and caching/parallelism practices",
+      "source": "./enterprise-devtools/circleci",
+      "version": "1.0.0",
+      "strict": true
+    },
+    {
+      "name": "argocd-flux",
+      "description": "GitOps continuous delivery practices with ArgoCD and Flux",
+      "source": "./enterprise-devtools/argocd-flux",
+      "version": "1.0.0",
+      "strict": true
+    },
+    {
+      "name": "ansible",
+      "description": "Ansible playbook design, idempotency discipline, and secrets management practices",
+      "source": "./enterprise-devtools/ansible",
+      "version": "1.0.0",
+      "strict": true
+    },
+    {
+      "name": "pulumi",
+      "description": "Pulumi infrastructure-as-code with general-purpose languages, state, and stack reference practices",
+      "source": "./enterprise-devtools/pulumi",
+      "version": "1.0.0",
+      "strict": true
+    },
+    {
+      "name": "cloudformation",
+      "description": "AWS CloudFormation template design, stack update safety, and drift management practices",
+      "source": "./enterprise-devtools/cloudformation",
+      "version": "1.0.0",
+      "strict": true
+    },
+    {
+      "name": "playwright-cypress",
+      "description": "Playwright and Cypress end-to-end testing: automation model, flakiness, and CI reliability",
+      "source": "./enterprise-devtools/playwright-cypress",
+      "version": "1.0.0",
+      "strict": true
+    },
+    {
+      "name": "k6-jmeter",
+      "description": "k6 and JMeter load testing: realistic traffic modeling and result interpretation",
+      "source": "./enterprise-devtools/k6-jmeter",
+      "version": "1.0.0",
+      "strict": true
+    },
+    {
+      "name": "vault",
+      "description": "HashiCorp Vault secrets engines, dynamic secrets, and unseal/HA practices",
+      "source": "./enterprise-devtools/vault",
+      "version": "1.0.0",
+      "strict": true
+    },
+    {
+      "name": "okta-auth0",
+      "description": "Okta and Auth0 identity/SSO: OIDC/SAML, token handling, and MFA policy practices",
+      "source": "./enterprise-devtools/okta-auth0",
+      "version": "1.0.0",
+      "strict": true
+    },
+    {
+      "name": "sonarqube",
+      "description": "SonarQube static analysis, quality gates, and code health practices",
+      "source": "./enterprise-devtools/sonarqube",
+      "version": "1.0.0",
+      "strict": true
+    },
+    {
+      "name": "snyk",
+      "description": "Snyk dependency, container, and license vulnerability scanning practices",
+      "source": "./enterprise-devtools/snyk",
+      "version": "1.0.0",
+      "strict": true
+    },
+    {
+      "name": "confluence",
+      "description": "Confluence space design, page permissions, and documentation hygiene practices",
+      "source": "./enterprise-devtools/confluence",
+      "version": "1.0.0",
+      "strict": true
+    },
+    {
+      "name": "slack",
+      "description": "Slack workspace structure, app/bot permission scopes, and integration reliability practices",
+      "source": "./enterprise-devtools/slack",
+      "version": "1.0.0",
+      "strict": true
+    },
+    {
+      "name": "linear",
+      "description": "Linear cycles, triage workflow, and opinionated issue-tracking practices",
+      "source": "./enterprise-devtools/linear",
+      "version": "1.0.0",
+      "strict": true
+    },
+    {
+      "name": "notion",
+      "description": "Notion workspace architecture, database design, and permission inheritance practices",
+      "source": "./enterprise-devtools/notion",
+      "version": "1.0.0",
+      "strict": true
+    },
+    {
+      "name": "sentry",
+      "description": "Sentry error grouping, source maps, and alerting/PII hygiene practices",
+      "source": "./enterprise-devtools/sentry",
+      "version": "1.0.0",
+      "strict": true
+    },
+    {
+      "name": "honeycomb",
+      "description": "Honeycomb high-cardinality observability, instrumentation, and sampling practices",
+      "source": "./enterprise-devtools/honeycomb",
+      "version": "1.0.0",
+      "strict": true
+    },
+    {
+      "name": "sqlite",
+      "description": "SQLite embedded database concurrency, WAL mode, and appropriate-use practices",
+      "source": "./enterprise-devtools/sqlite",
+      "version": "1.0.0",
+      "strict": true
+    },
+    {
+      "name": "cassandra",
+      "description": "Apache Cassandra query-first data modeling, consistency levels, and ring architecture practices",
+      "source": "./enterprise-devtools/cassandra",
+      "version": "1.0.0",
+      "strict": true
+    },
+    {
+      "name": "dynamodb",
+      "description": "DynamoDB single-table design, partition key strategy, and capacity/cost practices",
+      "source": "./enterprise-devtools/dynamodb",
+      "version": "1.0.0",
+      "strict": true
+    },
+    {
+      "name": "clickhouse",
+      "description": "ClickHouse columnar OLAP design, MergeTree engine practices, and query performance",
+      "source": "./enterprise-devtools/clickhouse",
+      "version": "1.0.0",
+      "strict": true
+    },
+    {
+      "name": "snowflake",
+      "description": "Snowflake virtual warehouse cost management, micro-partitioning, and data recovery practices",
+      "source": "./enterprise-devtools/snowflake",
+      "version": "1.0.0",
+      "strict": true
+    },
+    {
+      "name": "nats",
+      "description": "NATS and JetStream pub/sub design, delivery guarantees, and consumer reliability practices",
+      "source": "./enterprise-devtools/nats",
+      "version": "1.0.0",
+      "strict": true
+    },
+    {
+      "name": "openapi-graphql",
+      "description": "OpenAPI/Swagger REST contract design and GraphQL schema/resolver practices",
+      "source": "./enterprise-devtools/openapi-graphql",
+      "version": "1.0.0",
+      "strict": true
+    },
+    {
+      "name": "helm",
+      "description": "Helm chart structure, templating, and release lifecycle practices",
+      "source": "./enterprise-devtools/helm",
+      "version": "1.0.0",
+      "strict": true
+    },
+    {
+      "name": "openshift",
+      "description": "OpenShift/OKD security context constraints, Routes, and Operator-based platform practices",
+      "source": "./enterprise-devtools/openshift",
+      "version": "1.0.0",
+      "strict": true
     }
   ]
 }

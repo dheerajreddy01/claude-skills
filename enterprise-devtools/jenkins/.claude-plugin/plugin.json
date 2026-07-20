@@ -1,0 +1,13 @@
+{
+  "name": "jenkins",
+  "description": "Jenkins pipeline design, plugin management, and credential security practices",
+  "version": "1.0.0",
+  "author": {
+    "name": "dheerajreddy01",
+    "email": "reddydheeraj94@gmail.com"
+  },
+  "homepage": "https://github.com/dheerajreddy01/claude-skills",
+  "repository": "https://github.com/dheerajreddy01/claude-skills",
+  "license": "MIT",
+  "keywords": ["jenkins", "ci-cd", "pipeline", "groovy"]
+}
