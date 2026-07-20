@@ -1,13 +1,13 @@
 ---
 name: director-pipeline
-version: 1.1.0
+version: 1.2.0
 description: Director → Developer → Tester handoff pipeline — a staged, document-driven workflow that carries a request through HLD/LLD design before build, and through verified, shipped work instead of one continuous "prompt and pray" pass
 triggers: [director pipeline, director dev tester, staged handoff, role pipeline, spec build test, HLD LLD design, high-level design low-level design]
 keywords: [workflow, methodology, multi-agent, handoff, quality-gate, spec-driven, acceptance-criteria, HLD, LLD, architecture-design]
 author: claude-domain-skills
 ---
 
-# Director → Dev → Tester Pipeline v1.1.0
+# Director → Dev → Tester Pipeline v1.2.0
 
 > Split any task into three roles with a written handoff between each — Director designs (HLD → LLD) and plans, Dev builds, Tester verifies, and gaps loop back instead of getting silently absorbed
 
@@ -180,14 +180,20 @@ Each arrow is a **checkpoint**: the receiving role should not start until the pr
 **Inputs**: `director-brief.md`, `dev-log.md`, and the actual code/output — not the developer's summary of what they think they built.
 
 **Responsibilities**:
+- Run the **HLD/LLD Completeness Check** (§6) first, before grading anything — it determines whether a given finding is a Dev bug or a Director-owned design gap, which changes how it's routed
 - Check off each acceptance criterion independently against the real implementation, not against the dev log's claims
 - Actively test the edge cases the Director enumerated, not just the happy path
 - Assign severity to every finding (blocking / should-fix / nice-to-have)
-- Route each finding to the right place (see §4)
+- Route each finding to the right place (see §4) — use the HLD/LLD Completeness Check's results to tell a genuine implementation bug apart from a design that was incomplete all along
 
 **Output — `test-report.md`**:
 ```markdown
 # Test Report: [task name]
+
+## HLD/LLD Completeness Check
+- [ ] Pass — design was complete enough that any finding below is a genuine
+      implementation issue, not a design gap
+- [ ] Gaps found — see notes; some findings below may route to Director instead of Dev
 
 ## Acceptance Criteria Results
 - [x] AC-1: PASS
@@ -206,7 +212,7 @@ Each arrow is a **checkpoint**: the receiving role should not start until the pr
 
 ## 4. The Loop
 
-Not every finding goes to the same place — routing it correctly is what keeps the loop from thrashing:
+Not every finding goes to the same place — routing it correctly is what keeps the loop from thrashing. Run the **HLD/LLD Completeness Check** (§6) before making these calls: it's the difference between "Dev deviated from a complete LLD" (routes to Dev) and "the LLD never covered this case" (routes to Director), which otherwise looks identical from the symptom alone.
 
 | Finding type | Symptom | Routes to | Why |
 |------|------|------|------|
@@ -256,6 +262,16 @@ If running everything in one continuous session instead, at minimum: write each 
 - [ ] Dev log documents every interpretation made on an ambiguous point
 - [ ] Dev log lists known gaps rather than presenting partial work as complete
 
+**Tester's HLD/LLD Completeness Check** (run this *before* grading findings as bug vs. gap — it's what makes §4's routing decisions defensible instead of a coin flip):
+- [ ] Every component the implementation actually touches is named in the HLD's Components list — an undocumented component introduced without a logged deviation is itself a finding
+- [ ] The HLD's Data Flow matches how data actually moves through the implementation — trace at least one real request/operation end-to-end, don't just read the diagram and assume
+- [ ] Every Key Architectural Decision in the HLD (sync vs. async, fail-open vs. fail-closed, where state lives) is verifiable directly in the code, not just asserted in the dev log
+- [ ] Every entity/field the implementation actually persists or transmits is covered by the LLD's Data Model/Schema section — flag any field or table the LLD never mentioned
+- [ ] Every API/function contract the implementation exposes matches the LLD's specified inputs, outputs, *and* error cases — check the error paths, not just the happy path
+- [ ] Every step in the LLD's Sequence for Key Flows is actually followed, in the specified order, for each key flow that was implemented
+- [ ] For every edge case actually reachable in the implementation, the LLD specified expected behavior for it — if the implementation had to invent behavior for something the LLD never covered, that's a **design gap** (routes to Director), not a **bug** (routes to Dev)
+- [ ] If HLD/LLD was marked "N/A, trivial change," confirm the change really was trivial — an implementation that grew non-trivial without ever getting a design pass is a finding in its own right
+
 **Before shipping:**
 - [ ] Every acceptance criterion is PASS or has an explicit, accepted follow-up
 - [ ] No finding is still "in flight" between roles
@@ -273,6 +289,7 @@ If running everything in one continuous session instead, at minimum: write each 
 | Dev reads the brief once, then works from memory | Implementation drifts from the brief (and its HLD/LLD) over a long task | Re-read the brief at the start of each major sub-task |
 | Dev disagrees with the LLD and silently implements something different | Tester verifies against a brief that no longer matches what was built, and the mismatch surfaces late | Log it as a deviation with rationale — let Tester/Director see the divergence, don't hide it |
 | Tester grades against the dev log's description instead of the actual code | Bugs the developer didn't notice never get caught | Tester must independently exercise the acceptance criteria, not read a summary |
+| Tester routes every finding to Dev by default | Design gaps get "fixed" as one-off patches instead of the LLD being corrected, and the same gap reopens next time a similar case comes up | Run the HLD/LLD Completeness Check first — a finding the design never covered routes to Director, not Dev |
 | Findings get fixed ad hoc without updating the brief | The same ambiguity resurfaces in the next round | Route requirements gaps to Director first, always |
 | The loop has no defined exit condition | Endless back-and-forth with no ship decision | Define "done" via §6's quality gates, not a feeling |
 
@@ -300,5 +317,6 @@ If running everything in one continuous session instead, at minimum: write each 
 
 | Version | Date | Changes |
 |------|------|------|
+| 1.2.0 | 2026-07-20 | Added a Tester quality gate — the HLD/LLD Completeness Check — that verifies the design docs are actually complete before findings are graded, so a genuine implementation bug (routes to Dev) can be told apart from a design gap the LLD never covered (routes to Director) |
 | 1.1.0 | 2026-07-20 | Director stage now explicitly designs HLD (components, data flow, architectural decisions) then LLD (data models, API contracts, algorithms, sequences) before writing acceptance criteria, scaled to task complexity |
 | 1.0.0 | 2026-07-20 | Initial version |

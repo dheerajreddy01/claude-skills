@@ -129,6 +129,18 @@ architectural decision.
 ```markdown
 # Test Report: API rate limiter
 
+## HLD/LLD Completeness Check
+- [ ] Gaps found — see notes below
+
+Traced the sliding-window flow end-to-end against the LLD's Sequence for Key
+Flows: steps 1-5 match the implementation exactly. HLD's fail-open decision
+verified directly in code (`middleware/rate_limit.go`, Redis error path),
+not just asserted in the dev log. However: the LLD's Data Flow only covers
+the Redis path — it never specifies what happens if the *Plans table*
+lookup (a different dependency, also on the request path) fails. That's a
+gap in the design itself, not something Dev got wrong; flagging it below
+as a design gap rather than a bug.
+
 ## Acceptance Criteria Results
 - [x] AC-1: PASS
 - [x] AC-2: PASS — verified 429 + Retry-After header present and correctly valued
@@ -157,15 +169,17 @@ architectural decision.
 
 ### The Loop, In Practice
 
-Both findings route to **Director**, not Dev — in both cases Dev built exactly what
-the HLD/LLD specified (that's confirmed by AC-1 through AC-4 all passing), and what
-surfaced during testing is a **design gap**, not an implementation bug: the LLD simply
-never specified a contract for the `plans`-table failure path, and the HLD's fail-open
-decision didn't come with an operational visibility requirement. Because Dev's log
-showed zero deviations from a concrete LLD, Tester could tell immediately that these
-findings belong to Director (amend the design) rather than Dev (fix the code) — that
-clarity is the direct payoff of Director having done a real HLD/LLD pass instead of
-handing Dev a vague brief and letting these decisions get made ad hoc mid-implementation.
+Both findings route to **Director**, not Dev — and the HLD/LLD Completeness Check
+run at the top of the test report is *why* Tester could tell that confidently.
+Tracing the implementation against the LLD's Sequence for Key Flows and verifying
+the HLD's fail-open decision directly in code confirmed Dev built exactly what was
+specified (also corroborated by AC-1 through AC-4 all passing) — so what surfaced
+during testing is a **design gap**, not an implementation bug: the LLD simply never
+specified a contract for the `plans`-table failure path, and the HLD's fail-open
+decision didn't come with an operational visibility requirement. Without running
+the completeness check first, it would have been tempting to just hand both
+findings to Dev as "bugs" — they'd have gotten patched ad hoc, and the underlying
+design gap would still be undocumented the next time a similar case came up.
 
 This is the pipeline working as intended: a real gap surfaced, got routed to the role
 that should actually decide it, and shipping proceeded with the gap tracked instead
