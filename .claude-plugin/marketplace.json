@@ -351,6 +351,20 @@
       "source": "./enterprise-devtools/rabbitmq",
       "version": "1.0.0",
       "strict": true
+    },
+    {
+      "name": "elasticsearch",
+      "description": "Elasticsearch mapping design, sharding strategy, and query DSL performance practices",
+      "source": "./enterprise-devtools/elasticsearch",
+      "version": "1.0.0",
+      "strict": true
+    },
+    {
+      "name": "kafka",
+      "description": "Kafka topic/partition design, delivery semantics, and consumer group reliability practices",
+      "source": "./enterprise-devtools/kafka",
+      "version": "1.0.0",
+      "strict": true
     }
   ]
 }
