@@ -91,6 +91,16 @@ get the strictest tier, not rejected outright.)*
 ```markdown
 # Dev Log: API rate limiter
 
+## HLD/LLD Completeness Check
+- [x] Pass — design was complete enough to implement without inventing structure
+
+Walked the LLD's Data Model, API contract (`checkRateLimit`), and Sequence for Key
+Flows against the actual codebase before starting. Redis sorted-set approach and
+the `plans` table read both check out against existing infrastructure. HLD's
+fail-open decision is directly implementable as specified. No components needed
+that the HLD didn't already name. Check passed clean — see Design Gaps Found
+below for what still slipped through despite that.
+
 ## Implementation Summary
 Built exactly to the LLD: sliding-window rate limiter as middleware on all routes
 under `/api/v1/*`, using Redis sorted sets keyed `ratelimit:{api_key}`, tier limits
@@ -107,15 +117,25 @@ architectural decision.
   full window reset or the next single slot opening — interpreted as "seconds
   until the full window resets," the simpler of the two to reason about correctly
 
+## Design Gaps Found
+- The LLD specified an error contract for the Redis dependency (fail-open) but
+  never specified one for the `plans` table lookup — a separate dependency on
+  the same request path. Not caught by the pre-implementation completeness
+  check because the LLD's Data Flow only called out Redis as a failure-prone
+  step; the `plans` lookup read as "just a DB read" and didn't visibly need
+  its own error contract until actually building the error-handling branches.
+  Currently falls through to a generic 500. Flagging rather than silently
+  picking fail-open/fail-closed myself, since the HLD's fail-open rationale
+  (availability over strict enforcement) may or may not extend to this
+  dependency too — that's a call for Director, not an implementation detail.
+
 ## Deviations From Brief
 - None — HLD/LLD covered the design decisions (fail-open, sliding window, Redis
   key pattern) concretely enough that no ad hoc decisions were needed during
   implementation
 
 ## Known Gaps
-- The LLD didn't specify what happens if the `plans` table lookup itself fails
-  (separately from the Redis counter) — currently falls through to a generic
-  500, not addressed by any acceptance criterion
+- None beyond the item logged in Design Gaps Found above
 
 ## Notes for Tester
 - To simulate Redis unreachable, stop the local redis container and hit any endpoint
@@ -135,11 +155,16 @@ architectural decision.
 Traced the sliding-window flow end-to-end against the LLD's Sequence for Key
 Flows: steps 1-5 match the implementation exactly. HLD's fail-open decision
 verified directly in code (`middleware/rate_limit.go`, Redis error path),
-not just asserted in the dev log. However: the LLD's Data Flow only covers
-the Redis path — it never specifies what happens if the *Plans table*
-lookup (a different dependency, also on the request path) fails. That's a
-gap in the design itself, not something Dev got wrong; flagging it below
-as a design gap rather than a bug.
+not just asserted in the dev log. Independently confirms the gap Dev's own
+dev-log already flagged: the LLD's Data Flow only covers the Redis path — it
+never specifies what happens if the *Plans table* lookup (a different
+dependency, also on the request path) fails. Dev's pre-implementation check
+didn't catch this because the LLD only visibly called out Redis as
+failure-prone; this check catches it independently by verifying every
+dependency on the actual request path against the LLD, not just the ones the
+LLD happened to already flag. This is a gap in the design itself, not
+something Dev got wrong — same conclusion Dev already reached, now confirmed
+by an independent pass rather than taken on the developer's word alone.
 
 ## Acceptance Criteria Results
 - [x] AC-1: PASS
@@ -169,17 +194,28 @@ as a design gap rather than a bug.
 
 ### The Loop, In Practice
 
-Both findings route to **Director**, not Dev — and the HLD/LLD Completeness Check
-run at the top of the test report is *why* Tester could tell that confidently.
-Tracing the implementation against the LLD's Sequence for Key Flows and verifying
-the HLD's fail-open decision directly in code confirmed Dev built exactly what was
-specified (also corroborated by AC-1 through AC-4 all passing) — so what surfaced
-during testing is a **design gap**, not an implementation bug: the LLD simply never
-specified a contract for the `plans`-table failure path, and the HLD's fail-open
-decision didn't come with an operational visibility requirement. Without running
-the completeness check first, it would have been tempting to just hand both
-findings to Dev as "bugs" — they'd have gotten patched ad hoc, and the underlying
-design gap would still be undocumented the next time a similar case came up.
+Both findings route to **Director**, not Dev — and this example shows the check
+working at both layers, not just Tester's. Dev ran the HLD/LLD Completeness Check
+*before* writing any code and it passed clean on paper, but the `plans`-table gap
+still slipped through: the LLD only visibly flagged Redis as failure-prone, so
+nothing about a first pass over the design pointed at the Plans lookup needing
+its own error contract. Dev only surfaced it while actually wiring up the error
+handling — logged immediately as a Design Gap rather than silently picked
+one way or the other. Tester's independent check then re-verified the same
+conclusion from scratch (tracing the actual code, not trusting Dev's log), which
+is exactly the point of running it twice: Dev's pre-implementation check catches
+most gaps before a line of code exists, and Tester's post-implementation check
+catches whatever slipped past that first pass, cross-checked against reality
+instead of a developer's own account of their work.
+
+Because both checks agree Dev built exactly what the LLD specified (also
+corroborated by AC-1 through AC-4 all passing), Tester could confidently label
+this a **design gap**, not an implementation bug — the LLD simply never specified
+a contract for the `plans`-table failure path, and the HLD's fail-open decision
+didn't come with an operational visibility requirement. Without either
+completeness check, it would have been tempting to just hand both findings to
+Dev as "bugs" — they'd have gotten patched ad hoc, and the underlying design gap
+would still be undocumented the next time a similar case came up.
 
 This is the pipeline working as intended: a real gap surfaced, got routed to the role
 that should actually decide it, and shipping proceeded with the gap tracked instead

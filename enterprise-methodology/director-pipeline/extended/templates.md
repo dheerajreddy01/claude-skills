@@ -84,6 +84,15 @@ The failure mode to avoid in both directions: writing ceremony nobody needed for
 ```markdown
 # Dev Log: [task name]
 
+## HLD/LLD Completeness Check
+[Run this BEFORE writing code. Walk the LLD's Data Model, API/Function Contracts,
+and Sequence for Key Flows against what you can actually see needs building.
+Confirm the HLD's Key Architectural Decisions don't contradict what implementing
+the LLD as written would require. If the brief was marked "N/A, trivial change,"
+confirm that still holds once you can see the real scope.]
+- [ ] Pass — design was complete enough to implement without inventing structure
+- [ ] Gaps found — logged below in Design Gaps Found
+
 ## Implementation Summary
 [What was built, where (files/modules touched), and the overall approach]
 
@@ -93,6 +102,15 @@ The failure mode to avoid in both directions: writing ceremony nobody needed for
 
 ## Interpretations Made
 - [AC-N] was ambiguous about [what] → interpreted as [decision], because [reasoning]
+
+## Design Gaps Found
+- [Anything the HLD/LLD didn't cover that you had to make a call on anyway,
+  whether caught by the pre-implementation check or discovered mid-build —
+  e.g. an unassigned component, an undefined error path, a Sequence for Key
+  Flows step that didn't hold against the real codebase. Log it even if you
+  took your best guess and kept moving: this is what lets Tester/Director
+  route it correctly instead of it quietly becoming "how the code just
+  happens to work." Leave empty (not omitted) if the check passed clean.]
 
 ## Deviations From Brief
 - [Anything built differently than specified, and why — a constraint the brief

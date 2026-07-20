@@ -1,13 +1,13 @@
 ---
 name: director-pipeline
-version: 1.2.0
+version: 1.3.0
 description: Director → Developer → Tester handoff pipeline — a staged, document-driven workflow that carries a request through HLD/LLD design before build, and through verified, shipped work instead of one continuous "prompt and pray" pass
 triggers: [director pipeline, director dev tester, staged handoff, role pipeline, spec build test, HLD LLD design, high-level design low-level design]
 keywords: [workflow, methodology, multi-agent, handoff, quality-gate, spec-driven, acceptance-criteria, HLD, LLD, architecture-design]
 author: claude-domain-skills
 ---
 
-# Director → Dev → Tester Pipeline v1.2.0
+# Director → Dev → Tester Pipeline v1.3.0
 
 > Split any task into three roles with a written handoff between each — Director designs (HLD → LLD) and plans, Dev builds, Tester verifies, and gaps loop back instead of getting silently absorbed
 
@@ -153,20 +153,34 @@ Each arrow is a **checkpoint**: the receiving role should not start until the pr
 **Inputs**: `director-brief.md` only.
 
 **Responsibilities**:
+- Run the **HLD/LLD Completeness Check** (§6) *before* writing any code — catching a design gap before implementation starts is cheaper than discovering it mid-build or waiting for Tester to find it later
 - Implement strictly against the brief's scope — do not add unrequested features, do not skip in-scope ones
 - Follow the LLD's data model, API contracts, and algorithms as specified rather than re-deriving your own design — if the LLD is genuinely wrong or infeasible (not just a different style preference), that's a deviation to log, not a silent rewrite
 - Where the brief is ambiguous *and* has no open question flagged for it, take the most literal reading and document the interpretation (don't silently guess and hide it)
+- Where the LLD simply doesn't cover a case you can see is reachable, don't invent behavior for it silently — take your best literal-reading guess to keep moving (same as any other ambiguity), but log it as a **design gap**, not folded quietly into "implementation details"
 - Note any deviation from the brief — including the HLD/LLD — and why (e.g., a constraint the brief didn't anticipate)
 
 **Output — `dev-log.md`**:
 ```markdown
 # Dev Log: [task name]
 
+## HLD/LLD Completeness Check
+- [ ] Pass — design was complete enough to implement without inventing structure
+- [ ] Gaps found before/during implementation — see Design Gaps Found below
+
 ## Implementation Summary
 [what was built, where]
 
 ## Interpretations Made
 - AC-2 was ambiguous about ___ → interpreted as ___
+
+## Design Gaps Found
+- [Anything the HLD/LLD didn't cover that you had to make a call on anyway —
+  e.g. a component the HLD never assigned an owner to, an error path the LLD's
+  contract didn't define, a step in the Sequence for Key Flows that didn't hold
+  given the real codebase. Log these even if you took your best guess and kept
+  moving — this is what lets Tester/Director route it correctly instead of it
+  quietly becoming "how the code just happens to work."]
 
 ## Deviations From Brief
 - [if any, with rationale]
@@ -214,10 +228,12 @@ Each arrow is a **checkpoint**: the receiving role should not start until the pr
 
 Not every finding goes to the same place — routing it correctly is what keeps the loop from thrashing. Run the **HLD/LLD Completeness Check** (§6) before making these calls: it's the difference between "Dev deviated from a complete LLD" (routes to Dev) and "the LLD never covered this case" (routes to Director), which otherwise looks identical from the symptom alone.
 
+This check isn't only Tester's job. Dev runs the same check *before* implementation starts (§6), which means a design gap can surface — and route to Director — before a single line of code is written, instead of only being discovered after a full implementation and test pass. Tester's check is the second, independent line of defense for whatever Dev's own check didn't catch — the worked example in `extended/examples.md` shows a gap that got past Dev's pre-implementation check but was caught by Tester's, which is the normal case, not a failure of the process.
+
 | Finding type | Symptom | Routes to | Why |
 |------|------|------|------|
 | **Implementation bug** | Code doesn't do what the brief says | **Dev** | The brief was right, the build was wrong |
-| **Requirements gap** | The brief didn't cover a case the Tester found | **Director** | The brief needs amending before Dev touches it again |
+| **Requirements gap** | The brief didn't cover a case Dev or Tester found | **Director** | The brief needs amending before Dev touches it again |
 | **Misinterpretation** | Dev's documented interpretation of an ambiguous AC was reasonable but wrong | **Director** first (clarify the AC), then **Dev** | Don't let Dev guess again on the same ambiguity |
 | **Scope creep** | Dev built something not in the brief | **Director** (decide: accept into scope, or cut) | Never silently keep unrequested work |
 
@@ -258,8 +274,17 @@ If running everything in one continuous session instead, at minimum: write each 
 - [ ] Out-of-scope items are explicit, not just omitted
 - [ ] Every open question is either answered or explicitly deferred to a human
 
+**Dev's HLD/LLD Completeness Check** (run this *before* writing code — catching a gap here is cheaper than discovering it mid-build or leaving it for Tester to find):
+- [ ] Every component the LLD requires you to touch is actually named in the HLD's Components list — if you need to touch something the HLD never mentioned, stop and flag it rather than silently expanding scope
+- [ ] The LLD's Data Model/Schema section defines every field/entity you'll actually need to persist or transmit — a field you need that the LLD never mentioned is a gap to flag, not a silent addition
+- [ ] The LLD's API/Function Contracts cover every input, output, and error case you can actually construct in the real implementation — an error condition the contract doesn't address gets flagged before you invent behavior for it
+- [ ] The LLD's Sequence for Key Flows is actually followable against the real codebase/dependencies — a step that doesn't hold is a design gap, not something to quietly route around
+- [ ] The HLD's Key Architectural Decisions don't contradict what implementing the LLD as written would actually require — if they do, stop and flag it rather than silently picking one
+- [ ] If HLD/LLD was marked "N/A, trivial change," confirm that's still true once you can see the real scope of the change — if it's grown non-trivial, that's worth flagging before continuing to build ad hoc
+
 **Before Tester starts:**
 - [ ] Dev log documents every interpretation made on an ambiguous point
+- [ ] Dev log's Design Gaps Found section captures anything the HLD/LLD didn't cover, even if Dev's completeness check passed initially and a gap only surfaced during implementation
 - [ ] Dev log lists known gaps rather than presenting partial work as complete
 
 **Tester's HLD/LLD Completeness Check** (run this *before* grading findings as bug vs. gap — it's what makes §4's routing decisions defensible instead of a coin flip):
@@ -288,6 +313,7 @@ If running everything in one continuous session instead, at minimum: write each 
 | Director writes a full HLD/LLD for a one-line fix | Wastes a round-trip on ceremony the task doesn't need | Scale design depth to task complexity — "N/A, trivial change" is a valid HLD/LLD section |
 | Dev reads the brief once, then works from memory | Implementation drifts from the brief (and its HLD/LLD) over a long task | Re-read the brief at the start of each major sub-task |
 | Dev disagrees with the LLD and silently implements something different | Tester verifies against a brief that no longer matches what was built, and the mismatch surfaces late | Log it as a deviation with rationale — let Tester/Director see the divergence, don't hide it |
+| Dev hits a case the LLD doesn't cover and quietly invents behavior for it without logging it | The gap becomes "how the code happens to work" instead of a tracked design decision, and Tester has no reason to suspect it's not in the LLD | Run the HLD/LLD Completeness Check before coding; log any gap found in the Design Gaps Found section even if you took your best guess and kept moving |
 | Tester grades against the dev log's description instead of the actual code | Bugs the developer didn't notice never get caught | Tester must independently exercise the acceptance criteria, not read a summary |
 | Tester routes every finding to Dev by default | Design gaps get "fixed" as one-off patches instead of the LLD being corrected, and the same gap reopens next time a similar case comes up | Run the HLD/LLD Completeness Check first — a finding the design never covered routes to Director, not Dev |
 | Findings get fixed ad hoc without updating the brief | The same ambiguity resurfaces in the next round | Route requirements gaps to Director first, always |
@@ -307,9 +333,10 @@ If running everything in one continuous session instead, at minimum: write each 
 
 1. **Catches misunderstood requirements before they're built**, not after
 2. **Separates architecture from implementation detail** — HLD decides the shape of the solution, LLD decides its concrete mechanics, so Dev isn't inventing structure while also writing code
-3. **Forces edge cases into the open** instead of leaving them to whichever role happens to think of them
-4. **Gives feedback a specific place to attach** — a named acceptance criterion — instead of a vague "this feels off"
-5. **Makes "done" a checklist, not a feeling** — every criterion PASS or an explicit, accepted gap
+3. **Catches design gaps at the earliest point they can be caught** — Dev's own completeness check surfaces most of them before a line of code is written; Tester's independent pass catches whatever Dev's own check missed
+4. **Forces edge cases into the open** instead of leaving them to whichever role happens to think of them
+5. **Gives feedback a specific place to attach** — a named acceptance criterion — instead of a vague "this feels off"
+6. **Makes "done" a checklist, not a feeling** — every criterion PASS or an explicit, accepted gap
 
 ---
 
@@ -317,6 +344,7 @@ If running everything in one continuous session instead, at minimum: write each 
 
 | Version | Date | Changes |
 |------|------|------|
+| 1.3.0 | 2026-07-20 | Added the same HLD/LLD Completeness Check to Dev's role, run before implementation starts — shifts design-gap detection earlier (before code is written) instead of relying solely on Tester to catch it after the fact; adds a Design Gaps Found section to dev-log.md |
 | 1.2.0 | 2026-07-20 | Added a Tester quality gate — the HLD/LLD Completeness Check — that verifies the design docs are actually complete before findings are graded, so a genuine implementation bug (routes to Dev) can be told apart from a design gap the LLD never covered (routes to Director) |
 | 1.1.0 | 2026-07-20 | Director stage now explicitly designs HLD (components, data flow, architectural decisions) then LLD (data models, API contracts, algorithms, sequences) before writing acceptance criteria, scaled to task complexity |
 | 1.0.0 | 2026-07-20 | Initial version |
