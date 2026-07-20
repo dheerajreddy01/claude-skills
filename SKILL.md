@@ -2,7 +2,7 @@
 schema: "1.0"
 name: claude-skills
 version: "2.0.0"
-description: A collection of domain expertise covering business, finance, creative, professional services, lifestyle, methodology, programming languages, cloud platforms, and developer tooling - 34 domains in total
+description: A collection of domain expertise covering business, finance, creative, professional services, lifestyle, methodology, programming languages, cloud platforms, and developer tooling - 41 domains in total
 triggers: [domain, professional, knowledge, business, finance, creative, lifestyle, language, cloud, devtools]
 keywords: [domain, skills, knowledge, business, finance, creative, professional, lifestyle, languages, cloud, devtools]
 author: dheerajreddy01
@@ -19,7 +19,7 @@ This is a library of domain expertise — spanning both non-technical fields and
 - Load specific domain knowledge on demand via skillpkg
 - Provide frameworks, methodologies, and best practices for each domain
 
-## Available Domains (34)
+## Available Domains (41)
 
 ### 💰 Finance
 | Domain | Triggers | Description |
@@ -90,6 +90,13 @@ This is a library of domain expertise — spanning both non-technical fields and
 | `enterprise-devtools/pagerduty` | pagerduty, on-call, escalation policy | PagerDuty on-call and incident response practices |
 | `enterprise-devtools/docker` | docker, dockerfile, container, compose | Docker image builds and container security practices |
 | `enterprise-devtools/kubernetes` | kubernetes, k8s, pod, deployment, helm | Kubernetes workload design and cluster reliability practices |
+| `enterprise-devtools/git` | git, merge, rebase, branch | Git branching models and history hygiene |
+| `enterprise-devtools/github-actions` | github actions, CI/CD, workflow, pipeline | GitHub Actions workflow design and security practices |
+| `enterprise-devtools/terraform` | terraform, IaC, hcl, terraform plan | Terraform state management and safe apply practices |
+| `enterprise-devtools/postgresql` | postgresql, postgres, SQL, EXPLAIN | PostgreSQL indexing and query performance practices |
+| `enterprise-devtools/redis` | redis, cache, key-value, TTL | Redis data structures and cache reliability practices |
+| `enterprise-devtools/mongodb` | mongodb, document database, aggregation pipeline | MongoDB schema design and aggregation practices |
+| `enterprise-devtools/postman` | postman, API testing, collection, newman | Postman collection design and CI-driven API testing |
 
 ## Usage
 

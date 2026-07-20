@@ -288,6 +288,55 @@
       "source": "./enterprise-devtools/kubernetes",
       "version": "1.0.0",
       "strict": true
+    },
+    {
+      "name": "git",
+      "description": "Git branching models, merge/rebase discipline, and history hygiene",
+      "source": "./enterprise-devtools/git",
+      "version": "1.0.0",
+      "strict": true
+    },
+    {
+      "name": "github-actions",
+      "description": "GitHub Actions CI/CD workflow design, security, and supply-chain practices",
+      "source": "./enterprise-devtools/github-actions",
+      "version": "1.0.0",
+      "strict": true
+    },
+    {
+      "name": "terraform",
+      "description": "Terraform state management, module design, and safe apply practices",
+      "source": "./enterprise-devtools/terraform",
+      "version": "1.0.0",
+      "strict": true
+    },
+    {
+      "name": "postgresql",
+      "description": "PostgreSQL indexing, query planning, transactions, and operational practices",
+      "source": "./enterprise-devtools/postgresql",
+      "version": "1.0.0",
+      "strict": true
+    },
+    {
+      "name": "redis",
+      "description": "Redis data structures, eviction/persistence strategy, and cache reliability practices",
+      "source": "./enterprise-devtools/redis",
+      "version": "1.0.0",
+      "strict": true
+    },
+    {
+      "name": "mongodb",
+      "description": "MongoDB schema design, indexing, aggregation pipelines, and replica set practices",
+      "source": "./enterprise-devtools/mongodb",
+      "version": "1.0.0",
+      "strict": true
+    },
+    {
+      "name": "postman",
+      "description": "Postman collection design, environment management, and CI-driven API testing practices",
+      "source": "./enterprise-devtools/postman",
+      "version": "1.0.0",
+      "strict": true
     }
   ]
 }
