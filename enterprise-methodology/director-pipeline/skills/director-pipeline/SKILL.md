@@ -1,13 +1,13 @@
 ---
 name: director-pipeline
-version: 1.3.0
-description: Director → Developer → Tester handoff pipeline — a staged, document-driven workflow that carries a request through HLD/LLD design before build, and through verified, shipped work instead of one continuous "prompt and pray" pass
-triggers: [director pipeline, director dev tester, staged handoff, role pipeline, spec build test, HLD LLD design, high-level design low-level design]
-keywords: [workflow, methodology, multi-agent, handoff, quality-gate, spec-driven, acceptance-criteria, HLD, LLD, architecture-design]
+version: 1.4.0
+description: Director → Developer → Tester handoff pipeline — a staged, document-driven workflow that turns a raw request or Jira ticket into HLD/LLD design, an explicit list of which of this library's skills apply, and verified, shipped work instead of one continuous "prompt and pray" pass
+triggers: [director pipeline, director dev tester, staged handoff, role pipeline, spec build test, HLD LLD design, high-level design low-level design, jira ticket to plan, skill selection]
+keywords: [workflow, methodology, multi-agent, handoff, quality-gate, spec-driven, acceptance-criteria, HLD, LLD, architecture-design, jira, skill-selection, ticket-intake]
 author: claude-domain-skills
 ---
 
-# Director → Dev → Tester Pipeline v1.3.0
+# Director → Dev → Tester Pipeline v1.4.0
 
 > Split any task into three roles with a written handoff between each — Director designs (HLD → LLD) and plans, Dev builds, Tester verifies, and gaps loop back instead of getting silently absorbed
 
@@ -15,6 +15,7 @@ author: claude-domain-skills
 
 ```bash
 /director-pipeline [task description]        # run the full 3-role pipeline on a new task
+/director-pipeline ticket [JIRA-ID or pasted ticket content]  # ticket-sourced task: full intake + skill selection
 /director-pipeline brief [task description]  # stop after the Director stage, produce only the brief
 /director-pipeline resume [stage]            # resume from an existing brief/dev-log/test-report
 /director-pipeline loop                      # re-enter the loop after a test-report flags issues
@@ -85,11 +86,19 @@ Each arrow is a **checkpoint**: the receiving role should not start until the pr
 
 ### Director
 
-**Inputs**: the raw task/request only — no prior code, no prior conversation assumed.
+**Inputs**: the raw task/request only — no prior code, no prior conversation assumed. This may be a few sentences, or a Jira ticket (see **Ticket Intake** below).
+
+**Ticket Intake** (when the raw input is a Jira ticket or any tracked issue, not free-text): read the *complete* ticket, not just the title —
+- **Description** and any **acceptance criteria already written on the ticket** — treat these as raw material to refine, not a finished brief; real tickets are rarely written in checkable Given-When-Then form or with a real HLD/LLD, and producing those is still Director's job
+- **Comments**, in chronological order — scope changes and stakeholder clarifications often live here, not in the original description; the most recent decision wins if a comment contradicts the original description, but flag it as an Open Question if it's genuinely unclear which is authoritative
+- **Linked issues** (blocks / is blocked by / relates to) — these frequently carry constraints or dependencies the ticket body doesn't restate
+- **Labels, components, and fix version** — often the clearest signal for which system/service/tech stack is involved, and directly feed Skill Selection below
+- Use the `/jira` skill if the ticket's workflow/field conventions for this specific Jira instance aren't already clear
 
 **Responsibilities**:
 - Restate the request in your own words to surface hidden assumptions
 - Identify what's explicitly in scope, and just as importantly, what's **out of scope** (non-goals)
+- **Skill Selection**: scan the request/ticket for every signal of what it actually touches — named languages/frameworks, cloud providers, databases, infra tools, ticket labels/components, linked service names — and cross-reference against this library's skill catalog (`enterprise-languages/`, `enterprise-cloud/`, `enterprise-devtools/`, and any other relevant category). List every skill that plausibly applies in the brief's **Relevant Skills** section, and name anything the ticket touches that has no matching skill in the library. Err toward including a skill when uncertain — a skill Dev/Tester didn't need costs nothing; a Sharp Edge that goes uncaught because nobody loaded the skill that documents it is expensive.
 - Design the solution in two passes, coarse to fine, **before** writing acceptance criteria:
   - **HLD (High-Level Design)** — the architecture pass: what components/modules exist, what each is responsible for, how data flows between them, and the key architectural decisions (sync vs. async, where state lives, what's a new component vs. an extension of an existing one)
   - **LLD (Low-Level Design)** — the implementation-detail pass, grounded in the HLD: data models/schemas, API/function contracts (inputs, outputs, error cases), core algorithms or business logic, and the sequence of operations for each key flow
@@ -111,6 +120,11 @@ Each arrow is a **checkpoint**: the receiving role should not start until the pr
 
 ## Out of Scope (Non-Goals)
 - ...
+
+## Relevant Skills
+- [skill-name]: [why it applies — e.g. "redis: caching layer for this feature"]
+- [skill-name]: [...]
+- [Note anything the task touches with no matching skill in the library]
 
 ## High-Level Design (HLD)
 [N/A for trivial changes — otherwise:]
@@ -153,6 +167,7 @@ Each arrow is a **checkpoint**: the receiving role should not start until the pr
 **Inputs**: `director-brief.md` only.
 
 **Responsibilities**:
+- Load and actively apply every skill listed in the brief's **Relevant Skills** section — not as background reading, but as concrete checks against the implementation (e.g., if `redis` is listed, verify an eviction policy and TTLs are actually set, not just that caching works in the happy path)
 - Run the **HLD/LLD Completeness Check** (§6) *before* writing any code — catching a design gap before implementation starts is cheaper than discovering it mid-build or waiting for Tester to find it later
 - Implement strictly against the brief's scope — do not add unrequested features, do not skip in-scope ones
 - Follow the LLD's data model, API contracts, and algorithms as specified rather than re-deriving your own design — if the LLD is genuinely wrong or infeasible (not just a different style preference), that's a deviation to log, not a silent rewrite
@@ -194,6 +209,7 @@ Each arrow is a **checkpoint**: the receiving role should not start until the pr
 **Inputs**: `director-brief.md`, `dev-log.md`, and the actual code/output — not the developer's summary of what they think they built.
 
 **Responsibilities**:
+- Load every skill listed in the brief's **Relevant Skills** section and verify the implementation against its Sharp Edges specifically — a passing acceptance criterion doesn't mean a known pitfall (e.g., a missing cache eviction policy, an unindexed hot query, a secret baked into a container layer) was actually avoided; the AC often never asked about it
 - Run the **HLD/LLD Completeness Check** (§6) first, before grading anything — it determines whether a given finding is a Dev bug or a Director-owned design gap, which changes how it's routed
 - Check off each acceptance criterion independently against the real implementation, not against the dev log's claims
 - Actively test the edge cases the Director enumerated, not just the happy path
@@ -260,6 +276,8 @@ The pipeline's value comes from each role seeing *only* its own inputs — not f
 
 **Recommended**: run Dev and Tester as separate subagent calls, briefed only with the relevant document(s), rather than as continued turns in the conversation that wrote the brief. A subagent whose prompt contains *only* `director-brief.md` genuinely cannot fall back on unstated conversational context — the same way a real developer working from a spec can't read their PM's mind.
 
+When spawning those subagents, explicitly invoke every skill named in the brief's **Relevant Skills** section as part of their briefing (not just hand them the brief and hope they infer which domain expertise applies) — e.g., if the brief lists `redis` and `postgresql`, load both skills into the Dev subagent's context alongside `director-brief.md`. This is what turns "the brief mentions caching" into the subagent actually knowing Redis's specific Sharp Edges, rather than reasoning about caching from generic knowledge.
+
 If running everything in one continuous session instead, at minimum: write each stage's document to a real file before moving to the next stage, and explicitly re-read the file (not your memory of writing it) when starting the next role.
 
 ---
@@ -267,6 +285,7 @@ If running everything in one continuous session instead, at minimum: write each 
 ## 6. Quality Gates
 
 **Before Dev starts:**
+- [ ] Relevant Skills section lists every skill this task plausibly touches (languages, cloud platforms, devtools) — cross-checked against ticket labels/components/linked issues if the source was a Jira ticket, not just the description text
 - [ ] Task complexity assessed and design depth matched to it (trivial → N/A; anything multi-component or architecturally significant → full HLD + LLD)
 - [ ] HLD names every component involved and its responsibility, with no "TBD" left for Dev to resolve
 - [ ] LLD specifies data models/API contracts/algorithms concretely enough that Dev isn't inventing structure while also writing code
@@ -309,6 +328,8 @@ If running everything in one continuous session instead, at minimum: write each 
 | Pitfall | Why it breaks the pipeline | Fix |
 |------|------|------|
 | Director writes goals, not checkable criteria ("make the UI nice") | Tester has nothing concrete to verify against | Rewrite every criterion in Given-When-Then form |
+| Director restates a Jira ticket's title/description but skips the comments and linked issues | Misses a scope change or constraint that only lives in a comment thread, and the brief is wrong from the start | Read the full ticket per Ticket Intake — comments, links, labels — not just the top-level fields |
+| Skill Selection skipped or guessed loosely ("this is probably just backend stuff") | Dev/Tester reason from generic knowledge instead of this library's documented Sharp Edges, and known pitfalls (missing index, cache eviction, secret in a container layer) go uncaught | Explicitly cross-reference ticket signals (labels, components, named tech) against the skill catalog and list every plausible match, erring toward inclusion |
 | Director skips HLD/LLD on a multi-component task and jumps straight to acceptance criteria | Dev ends up inventing the architecture mid-implementation, causing rework when Director's mental model turns out different | Design HLD (components, data flow) then LLD (schemas, contracts, algorithms) before writing criteria, for anything beyond a trivial change |
 | Director writes a full HLD/LLD for a one-line fix | Wastes a round-trip on ceremony the task doesn't need | Scale design depth to task complexity — "N/A, trivial change" is a valid HLD/LLD section |
 | Dev reads the brief once, then works from memory | Implementation drifts from the brief (and its HLD/LLD) over a long task | Re-read the brief at the start of each major sub-task |
@@ -324,19 +345,20 @@ If running everything in one continuous session instead, at minimum: write each 
 ## Extended Resources
 
 - Full document templates → [extended/templates.md](./extended/templates.md)
-- Worked example (a small feature end-to-end) → [extended/examples.md](./extended/examples.md)
-- Pairs well with `/tech-spec-gen` for a larger Director stage, and `/consistency-checker` before the Tester stage signs off
+- Worked example (a small feature end-to-end, plus a ticket-intake/skill-selection example) → [extended/examples.md](./extended/examples.md)
+- Pairs well with `/jira` for reading ticket structure/workflow conventions during Ticket Intake, `/tech-spec-gen` for a larger Director stage, and `/consistency-checker` before the Tester stage signs off
 
 ---
 
 ## Why It Matters
 
 1. **Catches misunderstood requirements before they're built**, not after
-2. **Separates architecture from implementation detail** — HLD decides the shape of the solution, LLD decides its concrete mechanics, so Dev isn't inventing structure while also writing code
-3. **Catches design gaps at the earliest point they can be caught** — Dev's own completeness check surfaces most of them before a line of code is written; Tester's independent pass catches whatever Dev's own check missed
-4. **Forces edge cases into the open** instead of leaving them to whichever role happens to think of them
-5. **Gives feedback a specific place to attach** — a named acceptance criterion — instead of a vague "this feels off"
-6. **Makes "done" a checklist, not a feeling** — every criterion PASS or an explicit, accepted gap
+2. **Turns a raw ticket into more than a to-do list** — Ticket Intake pulls in comments and linked issues a quick skim would miss, and Skill Selection means Dev/Tester apply this library's documented Sharp Edges instead of reasoning from generic knowledge
+3. **Separates architecture from implementation detail** — HLD decides the shape of the solution, LLD decides its concrete mechanics, so Dev isn't inventing structure while also writing code
+4. **Catches design gaps at the earliest point they can be caught** — Dev's own completeness check surfaces most of them before a line of code is written; Tester's independent pass catches whatever Dev's own check missed
+5. **Forces edge cases into the open** instead of leaving them to whichever role happens to think of them
+6. **Gives feedback a specific place to attach** — a named acceptance criterion — instead of a vague "this feels off"
+7. **Makes "done" a checklist, not a feeling** — every criterion PASS or an explicit, accepted gap
 
 ---
 
@@ -344,6 +366,7 @@ If running everything in one continuous session instead, at minimum: write each 
 
 | Version | Date | Changes |
 |------|------|------|
+| 1.4.0 | 2026-07-20 | Added Ticket Intake (reading a Jira ticket's full description, comments, linked issues, and labels — not just the title) and Skill Selection (cross-referencing what the task touches against this library's skill catalog and listing every applicable skill in the brief's new Relevant Skills section). Dev and Tester now load and actively apply those skills' Sharp Edges instead of reasoning from generic knowledge. |
 | 1.3.0 | 2026-07-20 | Added the same HLD/LLD Completeness Check to Dev's role, run before implementation starts — shifts design-gap detection earlier (before code is written) instead of relying solely on Tester to catch it after the fact; adds a Design Gaps Found section to dev-log.md |
 | 1.2.0 | 2026-07-20 | Added a Tester quality gate — the HLD/LLD Completeness Check — that verifies the design docs are actually complete before findings are graded, so a genuine implementation bug (routes to Dev) can be told apart from a design gap the LLD never covered (routes to Director) |
 | 1.1.0 | 2026-07-20 | Director stage now explicitly designs HLD (components, data flow, architectural decisions) then LLD (data models, API contracts, algorithms, sequences) before writing acceptance criteria, scaled to task complexity |

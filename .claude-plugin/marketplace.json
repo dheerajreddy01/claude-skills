@@ -774,9 +774,9 @@
     },
     {
       "name": "director-pipeline",
-      "description": "Director (HLD/LLD design) to Developer to Tester staged handoff workflow",
+      "description": "Director (Jira ticket intake, HLD/LLD design, skill selection) to Developer to Tester staged handoff workflow",
       "source": "./enterprise-methodology/director-pipeline",
-      "version": "1.3.0",
+      "version": "1.4.0",
       "strict": true
     }
   ]

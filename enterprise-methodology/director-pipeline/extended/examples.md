@@ -1,5 +1,54 @@
 # Director Pipeline — Worked Example
 
+## Example: Ticket Intake → Skill Selection
+
+Raw Jira ticket:
+
+```
+PROJ-482: Add rate limiting to public API
+Description: Customers are hitting our API too hard and causing outages.
+Need to add rate limiting.
+Labels: backend, api, reliability
+Component: payments-service
+
+Comments:
+- [PM, 3 days ago]: Let's scope this to just the public API for now, not
+  internal service-to-service calls.
+- [Eng Lead, 1 day ago]: payments-service already runs on Go + Postgres +
+  Redis — reuse the existing Redis cluster, don't spin up a new one.
+
+Linked issues:
+- Blocks PROJ-490 (customer-facing rate limit documentation)
+- Relates to PROJ-350 (previous incident postmortem: API overload)
+```
+
+**What a title-only skim would miss, and what Ticket Intake catches:**
+
+| Ticket Intake step | What it surfaces |
+|------|------|
+| Description | Vague — "add rate limiting" with no scope, no numbers. On its own, not enough to write a real brief. |
+| Comments | The **PM's comment** is the actual scope boundary (public API only) — it's not in the description at all. The **Eng Lead's comment** is a hard architectural constraint (reuse the existing Redis cluster) that belongs directly in the HLD's Key Architectural Decisions, not something Director should re-derive independently. |
+| Linked issues | PROJ-350 (the incident postmortem) is worth pulling in — it likely documents the actual failure mode that justifies this ticket existing at all, feeding Edge Cases & Failure Modes. PROJ-490 being blocked by this ticket signals customer-facing docs are expected once this ships — worth an Open Question about whether that's this Director's scope or a separate one. |
+| Labels / Component | `backend`, `api`, `payments-service` — combined with the Eng Lead's comment naming the actual stack, this is what makes Skill Selection concrete instead of a guess. |
+
+**Resulting Relevant Skills section** (this is what a description-only read would have under-specified — it would likely have guessed generically at "some backend language" and "some cache," not named the actual stack with confidence):
+
+```markdown
+## Relevant Skills
+- `go`: payments-service is implemented in Go (per Eng Lead's comment — not
+  stated anywhere in the ticket description itself)
+- `redis`: must reuse the existing Redis cluster per Eng Lead's comment — this
+  is a constraint, not a free architectural choice, and belongs in HLD too
+- `postgresql`: payments-service's tier/plan data lives in Postgres
+- No matching skill for whatever originally caused the PROJ-350 incident until
+  that postmortem is actually read — flagged as an Open Question rather than
+  assumed
+```
+
+This is the payoff of reading the full ticket instead of just the title: the Redis constraint and the public-API-only scope boundary both came from comments, not the description, and both would have been silently missed — or worse, silently guessed differently — by a Director that only skimmed the summary field.
+
+---
+
 ## Task: "Add a rate limiter to our public API"
 
 ### Stage 1 — Director
@@ -22,6 +71,12 @@ overwhelm the service, while legitimate traffic is unaffected.
 - Rate limiting internal service-to-service calls
 - A billing/quota UI for customers to see their own usage
 - Distributed rate limiting across multiple regions (single-region only for now)
+
+## Relevant Skills
+- `go`: service is implemented in Go
+- `redis`: rate limit counter store — check against Redis's known sharp edges (eviction policy, TTLs, atomic check-then-set) rather than just "caching works"
+- `postgresql`: tier limits are read from the existing `plans` table
+- No matching skill for the load balancer/instance-scaling layer itself — Dev/Tester are on general knowledge there
 
 ## High-Level Design (HLD)
 

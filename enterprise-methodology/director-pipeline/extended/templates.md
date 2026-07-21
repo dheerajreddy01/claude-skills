@@ -15,6 +15,13 @@ that's a sign it needs an Open Question, not a guess.]
 ## Out of Scope (Non-Goals)
 - [Just as important as in-scope — say explicitly what this task will NOT do]
 
+## Relevant Skills
+- [skill-name]: [why it applies to this task]
+- [skill-name]: [...]
+- [Note anything the task touches that has no matching skill in the library —
+  Dev/Tester should know they're working from general knowledge there, not a
+  documented Sharp Edges list]
+
 ## High-Level Design (HLD)
 [Write "N/A, trivial change" if the task doesn't warrant it — see the scaling
 guidance below. Otherwise:]
@@ -65,6 +72,33 @@ every subsection in the HLD above:]
 - [Anything genuinely ambiguous that a human should resolve before Dev starts.
   If this section is empty, double-check you didn't just silently guess instead.]
 ```
+
+## Ticket Intake Checklist
+
+Run through all of these when the raw input is a Jira ticket (or any tracked issue) — a ticket is raw material for the brief, not a finished one:
+
+- [ ] Read the full description, not just the summary/title
+- [ ] Read every comment in chronological order — look specifically for scope changes or clarifications that supersede the original description
+- [ ] Check linked issues (blocks / is blocked by / relates to) for constraints or dependencies not restated in the ticket body
+- [ ] Note labels, components, and fix version — these are often the clearest signal of which system/tech stack is involved and feed directly into Skill Selection below
+- [ ] If the description and a later comment conflict on scope, treat the most recent decision as authoritative — but add an Open Question if it's genuinely unclear which one is
+- [ ] Any acceptance criteria already written on the ticket get rewritten into checkable Given-When-Then form, not copied as-is — most ticket-authored ACs aren't independently verifiable yet
+
+## Skill Selection Guide
+
+Map signals from the request/ticket to this library's skill catalog. Common signal → skill mappings:
+
+| Signal in the ticket/request | Look for a matching skill in |
+|------|------|
+| Named programming language (Python, Go, Java, Rust, etc.) | `enterprise-languages/` |
+| Named cloud provider (AWS, Azure, GCP, Cloudflare, etc.) | `enterprise-cloud/` |
+| Named database, cache, or message queue (Postgres, Redis, Kafka, etc.) | `enterprise-devtools/` |
+| CI/CD, IaC, or container tooling mentioned (GitHub Actions, Terraform, Docker, Kubernetes) | `enterprise-devtools/` |
+| Observability/incident tooling mentioned (Datadog, PagerDuty, Sentry) | `enterprise-devtools/` |
+| Ticket labels/components naming a specific service | Check what language/database/cloud that service is known to use, even if not spelled out in this ticket |
+| Nothing in the library matches a clearly-involved technology | Say so explicitly in Relevant Skills — Dev/Tester should know they're on general knowledge for that piece, not a documented Sharp Edges list |
+
+**When in doubt, include it.** A skill that turns out unnecessary costs a subagent a bit of extra context. A skill that should have been loaded but wasn't means a documented, known pitfall goes unchecked.
 
 ## Scaling HLD/LLD to Task Size
 
